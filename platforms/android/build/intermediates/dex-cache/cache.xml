@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/victor/Documents/ubirchApp/platforms/android/build/intermediates/exploded-aar/org.apache.cordova/CordovaLib/6.3.0/debug/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.1"
+        sha1="df1a7a6af20c4eca090c1f535b77951ef6025bfb">
+        <dex dex="/Users/victor/Documents/ubirchApp/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-6.3.0-debug_d82e69d4eef2c09e7eea34f9c3a5a80426e87df1.jar" />
+    </item>
+
+</items>
