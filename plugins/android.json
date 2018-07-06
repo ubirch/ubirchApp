@@ -1,0 +1,33 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-ble-central": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.example.ble.thermometer"
+    }
+  },
+  "dependent_plugins": {}
+}
