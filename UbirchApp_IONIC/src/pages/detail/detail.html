@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ peripheral.name || 'Device' }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="padding">
+  <ion-card>
+    <h1>{{ temperature | formatTemperatureC }}</h1>
+    <h1>{{ temperature | formatTemperatureF }}</h1>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p>{{ statusMessage }}</p>
+  </ion-toolbar>
+</ion-footer>
