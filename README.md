@@ -1,8 +1,7 @@
-# Ionic3 Bluetooth Low Energy Connect
+# Ubirch Hybrid Mobile Application
 
-Scan for and connect to the Bluetooth Low Energy device. 
+Scan for and connect to the Bluetooth Low Energy device
 
-This example builds on the Scan example and adds a detail page with information about the connected peripheral.
 
 ## Ionic 3
 
