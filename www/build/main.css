@@ -25198,8 +25198,6 @@ ion-navbar.toolbar {
     padding-top: calc(16px + 20px);
   }
 }
-<<<<<<< HEAD
-=======
 
 page-detail .toolbar-content p {
   margin-left: 10px;
@@ -25208,4 +25206,3 @@ page-detail .toolbar-content p {
 page-home .toolbar-content p {
   margin-left: 10px;
 }
->>>>>>> connectBLE
