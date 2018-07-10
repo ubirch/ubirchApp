@@ -194,8 +194,10 @@ var DetailPage = (function () {
         this.ble.write(this.peripheral.id, "80e4196e-e6a2-4c5e-bd8d-090c2660d898", "80e40001-e6a2-4c5e-bd8d-090c2660d898", data);
     };
     DetailPage.prototype.ReadSignature = function () {
-        var buffer = this.ble.read(this.peripheral.id, "80e4196e-e6a22-4c5e-bd8d-090c2660d898", "80e4fe22-e6a2-4c5e-bd8d-090c2660d898");
-        console.log(this.bytesToString(buffer));
+        // var buffer = this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
+        // "80e4fe22-e6a2-4c5e-bd8d-090c2660d898");
+        // console.log(this.bytesToString(buffer));
+        console.log("helloworld");
     };
     return DetailPage;
 }());
