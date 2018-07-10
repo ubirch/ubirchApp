@@ -73,7 +73,7 @@ export class DetailPage {
   }
 
   bytesToString(buffer) {
-      return String.fromCharCode.apply(null, new Uint8Array(buffer));
+      return String.fromCharCode.apply(null, new ArrayBuffer(buffer));
   }
 
   WriteRandomValue() {

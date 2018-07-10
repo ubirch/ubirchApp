@@ -187,7 +187,7 @@ var DetailPage = (function () {
         return array.buffer;
     };
     DetailPage.prototype.bytesToString = function (buffer) {
-        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+        return String.fromCharCode.apply(null, new ArrayBuffer(buffer));
     };
     DetailPage.prototype.WriteRandomValue = function () {
         var data = this.stringToBytes("150150150");
