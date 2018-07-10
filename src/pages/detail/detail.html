@@ -30,6 +30,17 @@
   <ion-card>
     <ion-card-header>
       Details
+      <button ion-button (click) = "WriteRandomValue()">
+        Write Random Message
+      </button>
+
+      <button ion-button (click) = "ReadSignature()">
+        Read Signature
+      </button>
+
+      <button ion-button (click) = "VerifySignature()">
+        Verify
+      </button>
     </ion-card-header>
     <ion-card-content>
       <pre>{{peripheral | json }}</pre>
@@ -41,17 +52,5 @@
   <ion-toolbar>
     <p>{{ statusMessage }}</p>
   </ion-toolbar>
-
-  <button ion-button (click) = "WriteRandomValue()">
-    Write Random Message
-  </button>
-
-  <button ion-button (click) = "ReadSignature()">
-    Read Signature
-  </button>
-
-  <button ion-button (click) = "VerifySignature()">
-    Verify
-  </button>
 
 </ion-footer>
