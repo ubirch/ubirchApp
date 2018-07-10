@@ -1,8 +1,8 @@
 {
-  "name": "ionic-ble-connect",
+  "name": "UbirchApp",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Victor PATRIN",
+  "homepage": "ubirch.de",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -40,13 +40,14 @@
     "ionicons": "3.0.0",
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
+    "zone.js": "0.8.12",
+    "cordova-android": "~7.0.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "2.0.1",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project",
+  "description": "Ubirch app for cryptographic handshake",
   "cordova": {
     "plugins": {
       "cordova-plugin-ble-central": {
@@ -61,7 +62,8 @@
     },
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

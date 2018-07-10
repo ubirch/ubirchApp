@@ -16,7 +16,7 @@
   </ion-card>
 
   <ion-card>
-    <ion-card-header>
+    <ion-card-header align-self-center>
       Services
     </ion-card-header>
 
@@ -41,4 +41,17 @@
   <ion-toolbar>
     <p>{{ statusMessage }}</p>
   </ion-toolbar>
+
+  <button ion-button (click) = "WriteRandomValue()">
+    Write Random Message
+  </button>
+
+  <button ion-button (click) = "ReadSignature()">
+    Read Signature
+  </button>
+
+  <button ion-button (click) = "VerifySignature()">
+    Verify
+  </button>
+
 </ion-footer>

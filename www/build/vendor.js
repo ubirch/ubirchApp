@@ -74831,7 +74831,24 @@ function wrapPromise(pluginObj, methodName, args, opts) {
     if (opts === void 0) { opts = {}; }
     var pluginResult, rej;
     var p = Object(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* getPromise */])(function (resolve, reject) {
-        pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject);
+        if (opts.destruct) {
+            pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return resolve(args);
+            }, function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return reject(args);
+            });
+        }
+        else {
+            pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, resolve, reject);
+        }
         rej = reject;
     });
     // Angular throws an error on unhandled rejection, but in this case we have already printed
@@ -74863,7 +74880,25 @@ function wrapOtherPromise(pluginObj, methodName, args, opts) {
 function wrapObservable(pluginObj, methodName, args, opts) {
     if (opts === void 0) { opts = {}; }
     return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
-        var pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, observer.next.bind(observer), observer.error.bind(observer));
+        var pluginResult;
+        if (opts.destruct) {
+            pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return observer.next(args);
+            }, function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                return observer.error(args);
+            });
+        }
+        else {
+            pluginResult = callCordovaPlugin(pluginObj, methodName, args, opts, observer.next.bind(observer), observer.error.bind(observer));
+        }
         if (pluginResult && pluginResult.error) {
             observer.error(pluginResult.error);
             observer.complete();
@@ -74968,7 +75003,25 @@ function wrapInstance(pluginObj, methodName, opts) {
         }
         else if (opts.observable) {
             return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
-                var pluginResult = callInstance(pluginObj, methodName, args, opts, observer.next.bind(observer), observer.error.bind(observer));
+                var pluginResult;
+                if (opts.destruct) {
+                    pluginResult = callInstance(pluginObj, methodName, args, opts, function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return observer.next(args);
+                    }, function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return observer.error(args);
+                    });
+                }
+                else {
+                    pluginResult = callInstance(pluginObj, methodName, args, opts, observer.next.bind(observer), observer.error.bind(observer));
+                }
                 if (pluginResult && pluginResult.error) {
                     observer.error(pluginResult.error);
                     observer.complete();
@@ -74989,7 +75042,25 @@ function wrapInstance(pluginObj, methodName, opts) {
         }
         else if (opts.otherPromise) {
             return Object(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* getPromise */])(function (resolve, reject) {
-                var result = callInstance(pluginObj, methodName, args, opts, resolve, reject);
+                var result;
+                if (opts.destruct) {
+                    result = callInstance(pluginObj, methodName, args, opts, function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return resolve(args);
+                    }, function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return reject(args);
+                    });
+                }
+                else {
+                    result = callInstance(pluginObj, methodName, args, opts, resolve, reject);
+                }
                 if (result && !!result.then) {
                     result.then(resolve, reject);
                 }
@@ -74999,7 +75070,36 @@ function wrapInstance(pluginObj, methodName, opts) {
             });
         }
         else {
-            return Object(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* getPromise */])(function (resolve, reject) { return callInstance(pluginObj, methodName, args, opts, resolve, reject); });
+            var pluginResult_1, rej_1;
+            var p = Object(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* getPromise */])(function (resolve, reject) {
+                if (opts.destruct) {
+                    pluginResult_1 = callInstance(pluginObj, methodName, args, opts, function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return resolve(args);
+                    }, function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return reject(args);
+                    });
+                }
+                else {
+                    pluginResult_1 = callInstance(pluginObj, methodName, args, opts, resolve, reject);
+                }
+                rej_1 = reject;
+            });
+            // Angular throws an error on unhandled rejection, but in this case we have already printed
+            // a warning that Cordova is undefined or the plugin is uninstalled, so there is no reason
+            // to error
+            if (pluginResult_1 && pluginResult_1.error) {
+                p.catch(function () { });
+                typeof rej_1 === 'function' && rej_1(pluginResult_1.error);
+            }
+            return p;
         }
     };
 }
