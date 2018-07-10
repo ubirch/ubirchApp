@@ -78,13 +78,13 @@ export class DetailPage {
 
   WriteRandomValue() {
       var data = this.stringToBytes("150150150")
-      this.ble.write(this.peripheral.id, "ed95d93b0-251d-470a-a062-fa1922dfa9a8",
-          "e95d93b1-251d-470a-a062-fa1922dfa9a8", data);
+      this.ble.write(this.peripheral.id, "80e4196e-e6a2-4c5e-bd8d-090c2660d898",
+          "80e40001-e6a2-4c5e-bd8d-090c2660d898", data);
   }
 
   ReadSignature(){
-      var buffer = this.ble.read(this.peripheral.id,"ed95d93b0-251d-470a-a062-fa1922dfa9a8",
-      "e95d93b1-251d-470a-a062-fa1922dfa9a8");
+      var buffer = this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
+      "80e4fe22-e6a2-4c5e-bd8d-090c2660d898");
       console.log(this.bytesToString(buffer))
   }
 
