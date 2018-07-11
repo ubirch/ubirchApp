@@ -77,29 +77,46 @@ export class DetailPage {
   }
 
   WriteRandomValue() {
-      var data = this.stringToBytes("150150150")
+      var data = this.stringToBytes("5")
       this.ble.write(this.peripheral.id, "80e4196e-e6a2-4c5e-bd8d-090c2660d898",
           "80e40001-e6a2-4c5e-bd8d-090c2660d898", data,
-          function(data){
-          console.log("Hooray we have data"+JSON.stringify(data));
-          alert("Successfully wrote data to the device."+JSON.stringify(data) + this.peripheral.id);
-      },
-          function(){
-          alert("Failed to write characteristic in the device." + this.peripheral.id) ; } )
+      //     function(data){
+      //     console.log("Hooray we have data"+JSON.stringify(data));
+      //     alert("Successfully wrote data to the device."+JSON.stringify(data));
+      // },
+      //     function(){
+      //     alert("Failed to write characteristic in the device.") ; }
+      )
   }
 
-  ReadSignature(){
-      this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
-      "80e4fe22-e6a2-4c5e-bd8d-090c2660d898",
-          function(data){
-          console.log("Hooray we have data"+JSON.stringify(data));
-          alert("Successfully read data from device."+JSON.stringify(data));
-          },
-          function(){
-          alert("Failed to read characteristic from device.");
-      });
+//
+//   ReadSignature(){
+//       this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
+//       "80e4fe22-e6a2-4c5e-bd8d-090c2660d898",
+//           function(data){
+//           console.log("Hooray we have data"+JSON.stringify(data));
+//           alert("Successfully read data from device."+JSON.stringify(data));
+//           },
+//           function(){
+//           alert("Failed to read characteristic from device."); }
+//       );
+//
+//   }
 
-  }
+
+    ReadSignature(){
+        this.ble.read(this.peripheral.id,"0x1800",
+            "0x2A00",
+            function(data){
+                console.log("Hooray we have data"+JSON.stringify(data));
+                alert("Successfully read data from device."+JSON.stringify(data));
+            },
+            function(){
+                alert("Failed to read characteristic from device."); }
+        );
+
+    }
 
 
+}
 }
