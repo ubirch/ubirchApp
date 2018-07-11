@@ -108,7 +108,7 @@ export class DetailPage {
 
 
    ReadSignature() {
-      this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
+      this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
             data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
