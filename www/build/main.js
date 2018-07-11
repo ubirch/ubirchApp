@@ -193,9 +193,9 @@ var DetailPage = (function () {
         var data = this.stringToBytes("150150150");
         this.ble.write(this.peripheral.id, "80e4196e-e6a2-4c5e-bd8d-090c2660d898", "80e40001-e6a2-4c5e-bd8d-090c2660d898", data, function (data) {
             console.log("Hooray we have data" + JSON.stringify(data));
-            alert("Successfully read data from device." + JSON.stringify(data));
+            alert("Successfully wrote data to the device." + JSON.stringify(data) + this.peripheral.id);
         }, function () {
-            alert("Failed to read characteristic from device.");
+            alert("Failed to wwrite characteristic in the device.");
         });
     };
     DetailPage.prototype.ReadSignature = function () {
