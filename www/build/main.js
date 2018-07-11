@@ -212,13 +212,13 @@ var DetailPage = (function () {
         return ret;
     };
     ;
-    // toStr ( Array ) {
-    //     var str = "";
-    //     for (var i = 0; i < Array.length; i++) {
-    //         str = str +
-    //     }
-    //
-    // }
+    DetailPage.prototype.bin2String = function (array) {
+        var result = "";
+        for (var i = 0; i < array.length; i++) {
+            result += String.fromCharCode(parseInt(array[i], 2));
+        }
+        return result;
+    };
     DetailPage.prototype.WriteRandomValue = function () {
         var data = new Uint32Array(1);
         data[0] = 10;
@@ -226,7 +226,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bytesToString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bin2String(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());

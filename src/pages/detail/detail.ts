@@ -106,14 +106,11 @@ export class DetailPage {
        return ret;
   };
 
-  // toStr ( Array ) {
-  //     var str = "";
-  //     for (var i = 0; i < Array.length; i++) {
-  //         str = str +
-  //     }
-  //
-  // }
-
+  bin2String(array) {
+    var result = "";
+    for (var i = 0; i < array.length; i++) {result += String.fromCharCode(parseInt(array[i], 2)); }
+    return result;
+  }
 
   WriteRandomValue() {
       var data = new Uint32Array(1);
@@ -126,7 +123,7 @@ export class DetailPage {
 
    ReadSignature() {
       this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
+            data => this.showAlert('Success !', 'Characterisctic = '+ this.bin2String(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
    }
