@@ -97,6 +97,15 @@ export class DetailPage {
   }
 
 
+  toArray( buffer ) {
+      var len = buffer.length;
+      var ret = [];
+      for (var i = len-1; i >= 0; i--) {
+          ret.push(buffer[i]);
+       }
+       return ret;
+  };
+
 
   WriteRandomValue() {
       var data = new Uint32Array(1);
@@ -109,7 +118,7 @@ export class DetailPage {
 
    ReadSignature() {
       this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
+            data => this.showAlert('Success !', 'Characterisctic = '+ this.toArray(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
    }
