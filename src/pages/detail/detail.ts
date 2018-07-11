@@ -19,7 +19,6 @@ export class DetailPage {
 
   peripheral: any = {};
   statusMessage: string;
-  characteristic: string;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -97,13 +96,7 @@ export class DetailPage {
       return String.fromCharCode.apply(null, new Uint8Array(buffer));
   }
 
-  onCharacteristicChange(buffer:ArrayBuffer) {
-      var data = new Array(buffer);
-      console.log(data[0]);
-      this.ngZone.run(() => {
-      this.characteristic =  data[0];
-      });
-  }
+
 
   WriteRandomValue() {
       var data = new Uint32Array(1);
@@ -115,8 +108,8 @@ export class DetailPage {
 
 
    ReadSignature() {
-      this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
-            data => this.onCharacteristicChange(data),
+      this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
+            data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
    }

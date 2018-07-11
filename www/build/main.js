@@ -203,14 +203,6 @@ var DetailPage = (function () {
     DetailPage.prototype.bytesToString = function (buffer) {
         return String.fromCharCode.apply(null, new Uint8Array(buffer));
     };
-    DetailPage.prototype.onCharacteristicChange = function (buffer) {
-        var _this = this;
-        var data = new Array(buffer);
-        console.log(data[0]);
-        this.ngZone.run(function () {
-            _this.characteristic = data[0];
-        });
-    };
     DetailPage.prototype.WriteRandomValue = function () {
         var data = new Uint32Array(1);
         data[0] = 10;
@@ -218,7 +210,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(function (data) { return _this.onCharacteristicChange(data); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bytesToString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());
