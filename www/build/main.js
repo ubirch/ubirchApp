@@ -138,7 +138,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var GENERIC_ACCESS_SERVICE = '1800';
 var DEVICE_NAME_CHARACTERISTIC = '2A00';
 var HANDSHAKE_SERVICE = '80e4196e-e6a22-4c5e-bd8d-090c2660d898';
-var SIGNATURE_CHARACTERISTIC = '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
+var SIGNATURE_CHARACTERISTIC = '80e4001-e6a2-4c5e-bd8d-090c2660d898';
 var PUBLIC_KEY_CHARACTERISTIC = '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
 var DetailPage = (function () {
     function DetailPage(navCtrl, navParams, ble, alertCtrl, toastCtrl, ngZone) {
@@ -192,7 +192,7 @@ var DetailPage = (function () {
     };
     // The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
     DetailPage.prototype.stringToBytes = function (string) {
-        var array = new Uint8Array(string.length);
+        var array = new Uint32Array(string.length);
         for (var i = 0, l = string.length; i < l; i++)
             ;
         {
@@ -201,7 +201,7 @@ var DetailPage = (function () {
         return array.buffer;
     };
     DetailPage.prototype.bytesToString = function (buffer) {
-        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+        return String.fromCharCode.apply(null, new Uint32Array(buffer));
     };
     DetailPage.prototype.WriteRandomValue = function () {
         var data = new Uint32Array(1);
@@ -210,7 +210,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bytesToString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bytesToString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());

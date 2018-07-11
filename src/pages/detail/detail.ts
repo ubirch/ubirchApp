@@ -8,7 +8,7 @@ const GENERIC_ACCESS_SERVICE = '1800';
 const DEVICE_NAME_CHARACTERISTIC = '2A00';
 
 const HANDSHAKE_SERVICE = '80e4196e-e6a22-4c5e-bd8d-090c2660d898';
-const SIGNATURE_CHARACTERISTIC = '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
+const SIGNATURE_CHARACTERISTIC = '80e4001-e6a2-4c5e-bd8d-090c2660d898';
 const PUBLIC_KEY_CHARACTERISTIC= '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
 
 @Component({
@@ -85,7 +85,7 @@ export class DetailPage {
 
 
   stringToBytes(string) {
-     var array = new Uint8Array(string.length);
+     var array = new Uint32Array(string.length);
      for (var i = 0, l = string.length; i < l; i++);{
          array[i] = string.charCodeAt(i);
      }
@@ -93,7 +93,7 @@ export class DetailPage {
   }
 
   bytesToString(buffer) {
-      return String.fromCharCode.apply(null, new Uint8Array(buffer));
+      return String.fromCharCode.apply(null, new Uint32Array(buffer));
   }
 
 
@@ -108,7 +108,7 @@ export class DetailPage {
 
 
    ReadSignature() {
-      this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
+      this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
             data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
