@@ -85,7 +85,7 @@ export class DetailPage {
           alert("Successfully wrote data to the device."+JSON.stringify(data) + this.peripheral.id);
       },
           function(){
-          alert("Failed to wwrite characteristic in the device."); } )
+          alert("Failed to write characteristic in the device." + this.peripheral.id) ; } )
   }
 
   ReadSignature(){

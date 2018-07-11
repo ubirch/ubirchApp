@@ -195,7 +195,7 @@ var DetailPage = (function () {
             console.log("Hooray we have data" + JSON.stringify(data));
             alert("Successfully wrote data to the device." + JSON.stringify(data) + this.peripheral.id);
         }, function () {
-            alert("Failed to wwrite characteristic in the device.");
+            alert("Failed to write characteristic in the device." + this.peripheral.id);
         });
     };
     DetailPage.prototype.ReadSignature = function () {
