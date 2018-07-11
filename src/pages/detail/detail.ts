@@ -1,8 +1,15 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import {ed25519} from 'ed25519';
+// Bluetooth UUID
+
+const GENERIC_ACCESS_SERVICE = '1800';
+const DEVICE_NAME_CHARACTERISTIC = '2A00';
+
+const HANDSHAKE_SERVICE = '80e4196e-e6a22-4c5e-bd8d-090c2660d898';
+const SIGNATURE_CHARACTERISTIC = '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
+const PUBLIC_KEY_CHARACTERISTIC= '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
 
 @Component({
   selector: 'page-detail',
@@ -12,10 +19,12 @@ export class DetailPage {
 
   peripheral: any = {};
   statusMessage: string;
+  characteristic: string;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private ble: BLE,
+              private alertCtrl: AlertController,
               private toastCtrl: ToastController,
               private ngZone: NgZone) {
 
@@ -46,6 +55,15 @@ export class DetailPage {
     toast.present();
   }
 
+  showAlert(title, message) {
+      let alert = this.alertCtrl.create({
+          title: title,
+          subTitle: message,
+          buttons: ['OK']
+      });
+      alert.present();
+  }
+
   // Disconnect peripheral when leaving the page
   ionViewWillLeave() {
     console.log('ionViewWillLeave disconnecting Bluetooth');
@@ -61,6 +79,9 @@ export class DetailPage {
       this.statusMessage = message;
     });
   }
+
+
+
   // The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
 
 
@@ -76,47 +97,31 @@ export class DetailPage {
       return String.fromCharCode.apply(null, new Uint8Array(buffer));
   }
 
-  WriteRandomValue() {
-      var data = this.stringToBytes("5")
-      this.ble.write(this.peripheral.id, "80e4196e-e6a2-4c5e-bd8d-090c2660d898",
-          "80e40001-e6a2-4c5e-bd8d-090c2660d898", data,
-      //     function(data){
-      //     console.log("Hooray we have data"+JSON.stringify(data));
-      //     alert("Successfully wrote data to the device."+JSON.stringify(data));
-      // },
-      //     function(){
-      //     alert("Failed to write characteristic in the device.") ; }
-      )
+  onCharacteristicChange(buffer:ArrayBuffer) {
+      var data = new Array(buffer);
+      console.log(data[0]);
+      this.ngZone.run(() => {
+      this.characteristic =  data[0];
+      });
   }
 
-//
-//   ReadSignature(){
-//       this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
-//       "80e4fe22-e6a2-4c5e-bd8d-090c2660d898",
-//           function(data){
-//           console.log("Hooray we have data"+JSON.stringify(data));
-//           alert("Successfully read data from device."+JSON.stringify(data));
-//           },
-//           function(){
-//           alert("Failed to read characteristic from device."); }
-//       );
-//
-//   }
+  WriteRandomValue() {
+      var data = new Uint32Array(1);
+      data[0] = 10;
+      this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
+          SIGNATURE_CHARACTERISTIC, data.buffer)
+  }
 
 
-    ReadSignature(){
-        this.ble.read(this.peripheral.id,"0x1800",
-            "0x2A00",
-            function(data){
-                console.log("Hooray we have data"+JSON.stringify(data));
-                alert("Successfully read data from device."+JSON.stringify(data));
-            },
-            function(){
-                alert("Failed to read characteristic from device."); }
-        );
 
-    }
+   ReadSignature() {
+      this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
+            data => this.onCharacteristicChange(data),
+            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+      )
+   }
+
 
 
 }
-}
+

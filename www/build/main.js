@@ -104,8 +104,8 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-title>Ubirch App</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n   <!-- <ion-buttons> -->\n\n    <button ion-button full (click)="scan()">\n    Scan for BLE Devices\n    </button>\n\n    <!-- </ion-buttons> -->\n\n   <ion-list> \n    <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n      <h2>{{ device.name || \'Unnamed\' }}</h2>\n      <p>{{ device.id }}</p>\n      <p>RSSI: {{ device.rssi }}</p>\n    </button>  \n   </ion-list>\n\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ToastController */],
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* ToastController */],
         __WEBPACK_IMPORTED_MODULE_0__ionic_native_ble__["a" /* BLE */],
         __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* NgZone */]])
 ], HomePage);
@@ -134,13 +134,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
+// Bluetooth UUID
+var GENERIC_ACCESS_SERVICE = '1800';
+var DEVICE_NAME_CHARACTERISTIC = '2A00';
+var HANDSHAKE_SERVICE = '80e4196e-e6a22-4c5e-bd8d-090c2660d898';
+var SIGNATURE_CHARACTERISTIC = '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
+var PUBLIC_KEY_CHARACTERISTIC = '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
 var DetailPage = (function () {
-    function DetailPage(navCtrl, navParams, ble, toastCtrl, ngZone) {
+    function DetailPage(navCtrl, navParams, ble, alertCtrl, toastCtrl, ngZone) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.ble = ble;
+        this.alertCtrl = alertCtrl;
         this.toastCtrl = toastCtrl;
         this.ngZone = ngZone;
         this.peripheral = {};
@@ -162,6 +168,14 @@ var DetailPage = (function () {
             position: 'middle'
         });
         toast.present();
+    };
+    DetailPage.prototype.showAlert = function (title, message) {
+        var alert = this.alertCtrl.create({
+            title: title,
+            subTitle: message,
+            buttons: ['OK']
+        });
+        alert.present();
     };
     // Disconnect peripheral when leaving the page
     DetailPage.prototype.ionViewWillLeave = function () {
@@ -189,17 +203,22 @@ var DetailPage = (function () {
     DetailPage.prototype.bytesToString = function (buffer) {
         return String.fromCharCode.apply(null, new Uint8Array(buffer));
     };
+    DetailPage.prototype.onCharacteristicChange = function (buffer) {
+        var _this = this;
+        var data = new Array(buffer);
+        console.log(data[0]);
+        this.ngZone.run(function () {
+            _this.characteristic = data[0];
+        });
+    };
     DetailPage.prototype.WriteRandomValue = function () {
-        var data = this.stringToBytes("5");
-        this.ble.write(this.peripheral.id, "80e4196e-e6a2-4c5e-bd8d-090c2660d898", "80e40001-e6a2-4c5e-bd8d-090c2660d898", data);
+        var data = new Uint32Array(1);
+        data[0] = 10;
+        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, data.buffer);
     };
     DetailPage.prototype.ReadSignature = function () {
-        this.ble.read(this.peripheral.id, "80e4196e-e6a22-4c5e-bd8d-090c2660d898", "80e4fe22-e6a2-4c5e-bd8d-090c2660d898", function (data) {
-            console.log("Hooray we have data" + JSON.stringify(data));
-            alert("Successfully read data from device." + JSON.stringify(data));
-        }, function () {
-            alert("Failed to read characteristic from device.");
-        });
+        var _this = this;
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(function (data) { return _this.onCharacteristicChange(data); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());
@@ -207,10 +226,10 @@ DetailPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-detail',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>{{ peripheral.name || \'Device\' }}</ion-title>\n      <button ion-button (click) = "WriteRandomValue()">\n          Write Random Message\n      </button>\n\n      <button ion-button (click) = "ReadSignature()">\n          Read Signature\n      </button>\n\n      <button ion-button (click) = "VerifySignature()">\n          Verify\n      </button>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="padding">\n  <ion-card>\n    <ion-card-header>\n      {{ peripheral.name || \'Unnamed\' }}\n    </ion-card-header>\n    <ion-card-content>\n      {{ peripheral.id }}\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header align-self-center>\n      Services\n    </ion-card-header>\n\n    <ion-list>\n      <ion-item *ngFor="let service of peripheral.services">\n        {{service}}\n      </ion-item>\n    </ion-list>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header>\n      Details\n    </ion-card-header>\n    <ion-card-content>\n      <pre>{{peripheral | json }}</pre>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */]) === "function" && _f || Object])
 ], DetailPage);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=detail.js.map
 
 /***/ }),
@@ -272,9 +291,9 @@ AppModule = __decorate([
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */])
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */])
         ],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
         entryComponents: [
             __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
             __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */],
@@ -283,7 +302,7 @@ AppModule = __decorate([
         providers: [
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] },
+            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
             __WEBPACK_IMPORTED_MODULE_5__ionic_native_ble__["a" /* BLE */]
         ]
     })
@@ -332,7 +351,7 @@ var MyApp = (function () {
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
