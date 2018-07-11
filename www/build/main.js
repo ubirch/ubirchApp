@@ -201,7 +201,7 @@ var DetailPage = (function () {
         return array.buffer;
     };
     DetailPage.prototype.bytesToString = function (buffer) {
-        return String.fromCharCode.apply(null, new Uint32Array(buffer));
+        return String.fromCharCode.apply(buffer.toArray());
     };
     DetailPage.prototype.toArray = function (buffer) {
         var len = buffer.length;
@@ -212,7 +212,7 @@ var DetailPage = (function () {
         return ret;
     };
     ;
-    // toString ( Array ) {
+    // toStr ( Array ) {
     //     var str = "";
     //     for (var i = 0; i < Array.length; i++) {
     //         str = str +
@@ -226,7 +226,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toArray.toString()); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bytesToString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());

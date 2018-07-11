@@ -93,7 +93,7 @@ export class DetailPage {
   }
 
   bytesToString(buffer) {
-      return String.fromCharCode.apply(null, new Uint32Array(buffer));
+      return String.fromCharCode.apply(buffer.toArray());
   }
 
 
@@ -106,7 +106,7 @@ export class DetailPage {
        return ret;
   };
 
-  // toString ( Array ) {
+  // toStr ( Array ) {
   //     var str = "";
   //     for (var i = 0; i < Array.length; i++) {
   //         str = str +
@@ -126,7 +126,7 @@ export class DetailPage {
 
    ReadSignature() {
       this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = '+ this.toArray(data).toString() ),
+            data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
    }
