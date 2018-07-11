@@ -73,7 +73,7 @@ export class DetailPage {
   }
 
   bytesToString(buffer) {
-      return String.fromCharCode.apply(null, new ArrayBuffer(buffer));
+      return String.fromCharCode.apply(null, new Uint8Array(buffer));
   }
 
   WriteRandomValue() {
@@ -83,10 +83,16 @@ export class DetailPage {
   }
 
   ReadSignature(){
-      // var buffer = this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
-      // "80e4fe22-e6a2-4c5e-bd8d-090c2660d898");
-      // console.log(this.bytesToString(buffer));
-      console.log("helloworld");
+      var buffer = this.ble.read(this.peripheral.id,"80e4196e-e6a22-4c5e-bd8d-090c2660d898",
+      "80e4fe22-e6a2-4c5e-bd8d-090c2660d898",
+          function(data){
+          console.log("Hooray we have data"+JSON.stringify(data));
+          alert("Successfully read data from device."+JSON.stringify(data));
+          },
+          function(failure){
+          alert("Failed to read characteristic from device.");
+      });
+
   }
 
 
