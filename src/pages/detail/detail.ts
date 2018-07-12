@@ -134,9 +134,9 @@ export class DetailPage {
       //       data => this.showAlert('Success !', 'Characterisctic = '+ this.toHexString(data)),
       //       () => this.showAlert('Unexpected Error', 'Failed to read signature')
       // )
-          this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = '+ data),
-            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+      this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
+        data => this.showAlert('Success !', 'Characterisctic = '+ JSON.stringify(data)),
+        () => this.showAlert('Unexpected Error', 'Failed to read signature')
     )
    }
 

@@ -248,7 +248,11 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + typeof (data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        // this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
+        //       data => this.showAlert('Success !', 'Characterisctic = '+ this.toHexString(data)),
+        //       () => this.showAlert('Unexpected Error', 'Failed to read signature')
+        // )
+        this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + JSON.stringify(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());
