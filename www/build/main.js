@@ -248,7 +248,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toHexString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + typeof (data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());
