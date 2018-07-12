@@ -6,7 +6,7 @@ import { DetailPage } from '../detail/detail';
 
 
 
-var byteArray = new Uint8Array([0x2f,0x3d, 0xff, 0x00]);
+var byteArray = new Uint8Array([150,0x3d, 0xff, 0x00]);
 
 @Component({
   selector: 'page-home',
@@ -85,8 +85,7 @@ export class HomePage {
   //           return ('0' + (byte & 0xFF).toString(16)).slice(-2);
   //       }).join('');
   // }
-    //
-    //
+
     toHexString(byteArray) {
         return Array.prototype.map.call(byteArray,b =>
             ('00' + b.toString(16)).slice(-2).toString()

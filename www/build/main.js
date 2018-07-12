@@ -49,7 +49,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var byteArray = new Uint8Array([0x2f, 0x3d, 0xff, 0x00]);
+var byteArray = new Uint8Array([150, 0x3d, 0xff, 0x00]);
 var HomePage = (function () {
     function HomePage(navCtrl, toastCtrl, ble, ngZone) {
         this.navCtrl = navCtrl;
@@ -109,8 +109,6 @@ var HomePage = (function () {
     //           return ('0' + (byte & 0xFF).toString(16)).slice(-2);
     //       }).join('');
     // }
-    //
-    //
     HomePage.prototype.toHexString = function (byteArray) {
         return Array.prototype.map.call(byteArray, function (b) {
             return ('00' + b.toString(16)).slice(-2).toString();
@@ -243,8 +241,8 @@ var DetailPage = (function () {
     //   return result;
     // }
     DetailPage.prototype.toHexString = function (byteArray) {
-        return byteArray.map(function (b) {
-            return ('0' + (b & 0xFF).toString(16)).slice(-2);
+        return Array.prototype.map.call(byteArray, function (b) {
+            return ('00' + b.toString(16)).slice(-2).toString();
         }).join('');
     };
     DetailPage.prototype.WriteRandomValue = function () {

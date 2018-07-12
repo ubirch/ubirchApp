@@ -115,11 +115,14 @@ export class DetailPage {
   // }
 
 
+
+
     toHexString(byteArray) {
         return Array.prototype.map.call(byteArray,b =>
             ('00' + b.toString(16)).slice(-2).toString()
         ).join('');
     }
+
 
   WriteRandomValue() {
       var data = new Uint32Array(1);
