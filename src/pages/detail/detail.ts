@@ -9,9 +9,9 @@ import {ed25519} from 'ed25519';
 const GENERIC_ACCESS_SERVICE = '1800';
 const DEVICE_NAME_CHARACTERISTIC = '2A00';
 
-const HANDSHAKE_SERVICE = '80e4196e-e6a22-4c5e-bd8d-090c2660d898';
-const SIGNATURE_CHARACTERISTIC = '80e4001-e6a2-4c5e-bd8d-090c2660d898';
-const PUBLIC_KEY_CHARACTERISTIC= '80e4fe22-e6a2-4c5e-bd8d-090c2660d898';
+const HANDSHAKE_SERVICE = '80E4196E-E6A2-4C5E-BD8D-090C2660D898';
+const SIGNATURE_CHARACTERISTIC = '80E4001-E6A2-4C5E-BD8D-090C2660D898';
+const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
 
 @Component({
   selector: 'page-detail',
@@ -85,17 +85,17 @@ export class DetailPage {
 
   // The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
 
-  //
-  // stringToBytes(string) {
-  //    var array = new Uint32Array(string.length);
-  //    for (var i = 0, l = string.length; i < l; i++);{
-  //        array[i] = string.charCodeAt(i);
-  //    }
-  //    return array.buffer;
-  // }
-  //
+
+  stringToBytes(string) {
+     var array = new Uint32Array(string.length);
+     for (var i = 0, l = string.length; i < l; i++);{
+         array[i] = string.charCodeAt(i);
+     }
+     return array.buffer;
+  }
+
   bytesToString(buffer) {
-      return String.fromCharCode.apply(buffer.toArray());
+      return String.fromCharCode.apply(null, new Uint8Array(buffer));
   }
 
   //
@@ -122,18 +122,15 @@ export class DetailPage {
 
   WriteRandomValue() {
       var data = new Uint32Array(1);
-      data[0] = 10;
+      data[0] = 64;
       this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
           SIGNATURE_CHARACTERISTIC, data.buffer)
   }
 
 
 
-   ReadSignature() {
-      // this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-      //       data => this.showAlert('Success !', 'Characterisctic = '+ this.toHexString(data)),
-      //       () => this.showAlert('Unexpected Error', 'Failed to read signature')
-      // )
+   ReadName() {
+
       this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
         data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
         () => this.showAlert('Unexpected Error', 'Failed to read signature')
@@ -141,6 +138,11 @@ export class DetailPage {
    }
 
 
-
+   ReadSignature() {
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
+            data => this.showAlert('Success !', 'Characterisctic = ' + this.toHexString(data)),
+            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+        )
+    }
 }
 
