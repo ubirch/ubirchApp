@@ -76,7 +76,7 @@ export class HomePage {
 
       var hexString = this.toHexString(byteArray);
       var byteArray2 = this.toByteArray(hexString);
-      console.log(hexString.toString())
+      console.log(hexString)
 
   }
 
