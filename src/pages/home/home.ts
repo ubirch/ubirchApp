@@ -6,7 +6,7 @@ import { DetailPage } from '../detail/detail';
 
 
 
-var byteArray = new Uint8Array([181,143,16,173,231,56,63,149,181,185,224,124,84,230,123,36]);
+var byteArray = new Uint8Array([0x2f,0x3d, 0xff, 0x00]);
 
 @Component({
   selector: 'page-home',
@@ -80,13 +80,21 @@ export class HomePage {
 
   }
 
-  toHexString(byteArray) {
-        return Array.prototype.map.call(byteArray, function(byte) {
-            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-        }).join('');
-  }
+  // toHexString(byteArray) {
+  //       return Array.prototype.map.call(byteArray, function(byte) {
+  //           return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+  //       }).join('');
+  // }
+    //
+    //
+    toHexString(byteArray) {
+        return Array.prototype.map.call(byteArray,b =>
+            ('00' + b.toString(16)).slice(-2).toString()
+        ).join('');
+    }
 
-  toByteArray(hexString) {
+
+    toByteArray(hexString) {
         var result = [];
         while (hexString.length >= 2) {
             result.push(parseInt(hexString.substring(0, 2), 16));

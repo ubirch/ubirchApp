@@ -49,7 +49,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var byteArray = new Uint8Array([181, 143, 16, 173, 231, 56, 63, 149, 181, 185, 224, 124, 84, 230, 123, 36]);
+var byteArray = new Uint8Array([0x2f, 0x3d, 0xff, 0x00]);
 var HomePage = (function () {
     function HomePage(navCtrl, toastCtrl, ble, ngZone) {
         this.navCtrl = navCtrl;
@@ -104,9 +104,16 @@ var HomePage = (function () {
         var byteArray2 = this.toByteArray(hexString);
         console.log(hexString);
     };
+    // toHexString(byteArray) {
+    //       return Array.prototype.map.call(byteArray, function(byte) {
+    //           return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    //       }).join('');
+    // }
+    //
+    //
     HomePage.prototype.toHexString = function (byteArray) {
-        return Array.prototype.map.call(byteArray, function (byte) {
-            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+        return Array.prototype.map.call(byteArray, function (b) {
+            return ('00' + b.toString(16)).slice(-2).toString();
         }).join('');
     };
     HomePage.prototype.toByteArray = function (hexString) {
@@ -236,8 +243,8 @@ var DetailPage = (function () {
     //   return result;
     // }
     DetailPage.prototype.toHexString = function (byteArray) {
-        return Array.prototype.map.call(byteArray, function (byte) {
-            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+        return byteArray.map(function (b) {
+            return ('0' + (b & 0xFF).toString(16)).slice(-2);
         }).join('');
     };
     DetailPage.prototype.WriteRandomValue = function () {
@@ -251,7 +258,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + JSON.stringify(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toHexString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());

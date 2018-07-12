@@ -115,10 +115,11 @@ export class DetailPage {
   // }
 
 
-  toHexString(byteArray) {
-      return Array.prototype.map.call(byteArray, function(byte) {
-          return ('0' + (byte & 0xFF).toString(16)).slice(-2); }).join('');
-  }
+    toHexString(byteArray) {
+        return Array.prototype.map.call(byteArray,b =>
+            ('00' + b.toString(16)).slice(-2).toString()
+        ).join('');
+    }
 
   WriteRandomValue() {
       var data = new Uint32Array(1);
@@ -140,7 +141,7 @@ export class DetailPage {
 
    ReadSignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = ' + JSON.stringify(data)),
+            data => this.showAlert('Success !', 'Characterisctic = ' + this.toHexString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
         )
     }
