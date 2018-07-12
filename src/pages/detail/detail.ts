@@ -2,6 +2,8 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 import { BLE } from '@ionic-native/ble';
 import {ed25519} from 'ed25519';
+
+
 // Bluetooth UUID
 
 const GENERIC_ACCESS_SERVICE = '1800';
@@ -83,33 +85,39 @@ export class DetailPage {
 
   // The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
 
+  //
+  // stringToBytes(string) {
+  //    var array = new Uint32Array(string.length);
+  //    for (var i = 0, l = string.length; i < l; i++);{
+  //        array[i] = string.charCodeAt(i);
+  //    }
+  //    return array.buffer;
+  // }
+  //
+  // bytesToString(buffer) {
+  //     return String.fromCharCode.apply(buffer.toArray());
+  // }
+  //
+  //
+  // toArray( buffer ) {
+  //     var len = buffer.length;
+  //     var ret = [];
+  //     for (var i = len-1; i >= 0; i--) {
+  //         ret.push(buffer[i]);
+  //      }
+  //      return ret;
+  // };
+  //
+  // bin2String(array) {
+  //   var result = "";
+  //   for (var i = 0; i < array.length; i++) {result += String.fromCharCode(parseInt(array[i], 2)); }
+  //   return result;
+  // }
 
-  stringToBytes(string) {
-     var array = new Uint32Array(string.length);
-     for (var i = 0, l = string.length; i < l; i++);{
-         array[i] = string.charCodeAt(i);
-     }
-     return array.buffer;
-  }
 
-  bytesToString(buffer) {
-      return String.fromCharCode.apply(buffer.toArray());
-  }
-
-
-  toArray( buffer ) {
-      var len = buffer.length;
-      var ret = [];
-      for (var i = len-1; i >= 0; i--) {
-          ret.push(buffer[i]);
-       }
-       return ret;
-  };
-
-  bin2String(array) {
-    var result = "";
-    for (var i = 0; i < array.length; i++) {result += String.fromCharCode(parseInt(array[i], 2)); }
-    return result;
+  toHexString(byteArray) {
+      return Array.prototype.map.call(byteArray, function(byte) {
+          return ('0' + (byte & 0xFF).toString(16)).slice(-2); }).join('');
   }
 
   WriteRandomValue() {
@@ -123,7 +131,7 @@ export class DetailPage {
 
    ReadSignature() {
       this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = '+ JSON.stringify(data)),
+            data => this.showAlert('Success !', 'Characterisctic = '+ this.toHexString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
       )
    }

@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "2.0.1",
+    "@types/node": "^10.5.2",
     "typescript": "2.3.4"
   },
   "description": "Ubirch app for cryptographic handshake",

@@ -7,13 +7,15 @@
 
 <ion-content>
 
-   <!-- <ion-buttons> -->
+   <ion-buttons>
 
     <button ion-button full (click)="scan()">
     Scan for BLE Devices
     </button>
 
-    <!-- </ion-buttons> -->
+    <button ion-button ArrayToString (click) = "convert()"> Convert </button>
+
+    </ion-buttons>
 
    <ion-list> 
     <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
