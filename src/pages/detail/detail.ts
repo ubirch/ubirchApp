@@ -94,10 +94,10 @@ export class DetailPage {
   //    return array.buffer;
   // }
   //
-  // bytesToString(buffer) {
-  //     return String.fromCharCode.apply(buffer.toArray());
-  // }
-  //
+  bytesToString(buffer) {
+      return String.fromCharCode.apply(buffer.toArray());
+  }
+
   //
   // toArray( buffer ) {
   //     var len = buffer.length;
@@ -135,7 +135,7 @@ export class DetailPage {
       //       () => this.showAlert('Unexpected Error', 'Failed to read signature')
       // )
       this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
-        data => this.showAlert('Success !', 'Characterisctic = '+ JSON.stringify(data)),
+        data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
         () => this.showAlert('Unexpected Error', 'Failed to read signature')
     )
    }

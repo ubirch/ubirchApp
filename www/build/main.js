@@ -217,10 +217,9 @@ var DetailPage = (function () {
     //    return array.buffer;
     // }
     //
-    // bytesToString(buffer) {
-    //     return String.fromCharCode.apply(buffer.toArray());
-    // }
-    //
+    DetailPage.prototype.bytesToString = function (buffer) {
+        return String.fromCharCode.apply(buffer.toArray());
+    };
     //
     // toArray( buffer ) {
     //     var len = buffer.length;
@@ -252,7 +251,7 @@ var DetailPage = (function () {
         //       data => this.showAlert('Success !', 'Characterisctic = '+ this.toHexString(data)),
         //       () => this.showAlert('Unexpected Error', 'Failed to read signature')
         // )
-        this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + JSON.stringify(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.bytesToString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());
