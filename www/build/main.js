@@ -102,7 +102,7 @@ var HomePage = (function () {
     HomePage.prototype.convert = function () {
         var hexString = this.toHexString(byteArray);
         var byteArray2 = this.toByteArray(hexString);
-        console.log(hexString);
+        console.log(hexString.toString());
     };
     HomePage.prototype.toHexString = function (byteArray) {
         return Array.prototype.map.call(byteArray, function (byte) {
@@ -251,7 +251,7 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.ReadSignature = function () {
         var _this = this;
-        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toHexString(data)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toHexString(data).toString()); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     return DetailPage;
 }());
