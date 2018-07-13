@@ -151,7 +151,8 @@ export class DetailPage {
 
     // verifySignature() {
     //     let signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
-    //     let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
+    //     let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVI
+    // CE, PUBLIC_KEY_CHARACTERISTIC);
     //
     //     if (ed25519.verify(new Buffer(message, 'utf8'), signature, pubKey )) {
     //         console.log('Signature valid');
