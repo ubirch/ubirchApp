@@ -134,7 +134,7 @@ export class DetailPage {
 
     readPubKey() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = ' + this.toHexString(data)[0]),
+            data => this.showAlert('Success !', 'Characterisctic = ' + typeof(data) + typeof(this.toHexString(data))),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
         )
     }
