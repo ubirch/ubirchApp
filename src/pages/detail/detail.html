@@ -1,16 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ peripheral.name || 'Device' }}</ion-title>
-      <button ion-button (click) = "WriteRandomValue()">
+      <button ion-button (click) = "writeMessage()">
           Write Random Message
       </button>
 
-      <button ion-button (click) = "ReadSignature()">
-          Read Signature
+      <button ion-button (click) = "readPubKey()">
+          Read PubKey
       </button>
 
-      <button ion-button (click) = "ReadName()">
+      <button ion-button (click) = "readName()">
           Read Name
+      </button>
+
+      <button ion-button (click) = "verifySignature()">
+          Verify Signature
       </button>
 
   </ion-navbar>

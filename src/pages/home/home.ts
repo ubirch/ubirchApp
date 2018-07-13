@@ -6,7 +6,7 @@ import { DetailPage } from '../detail/detail';
 
 
 
-var byteArray = new Uint8Array([150,0x3d, 0xff, 0x00]);
+var byteArray = new Uint8Array([150 ,0x3d, 0xff, 0x00]);
 
 @Component({
   selector: 'page-home',
