@@ -39,7 +39,7 @@
     <name>Connect</name>
     <description>Use Ionic to connect to BLE peripherals</description>
     <author href="http://github.com/don">Don Coleman</author>
-    <content original-src="index.html" src="http://192.168.178.151:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
