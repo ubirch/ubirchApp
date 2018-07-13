@@ -31,10 +31,10 @@ webpackEmptyAsyncContext.id = 149;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_ble__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__detail_detail__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__detail_detail__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_ble__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -44,7 +44,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -76,7 +75,9 @@ var HomePage = (function () {
             _this.devices.push(device);
         });
     };
-    // If location permission is denied, you'll end up here
+    /**
+     *     If location permission is denied, you'll end up here
+     */
     HomePage.prototype.scanError = function (error) {
         this.setStatus('Error ' + error);
         var toast = this.toastCtrl.create({
@@ -95,20 +96,19 @@ var HomePage = (function () {
     };
     HomePage.prototype.deviceSelected = function (device) {
         console.log(JSON.stringify(device) + ' selected');
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__detail_detail__["a" /* DetailPage */], {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__detail_detail__["a" /* DetailPage */], {
             device: device
         });
     };
+    /**
+     * This is just for testing byteArray conversion in hexString
+     */
     HomePage.prototype.convert = function () {
         var hexString = this.toHexString(byteArray);
         var byteArray2 = this.toByteArray(hexString);
         console.log(hexString);
+        console.log(byteArray2);
     };
-    // toHexString(byteArray) {
-    //       return Array.prototype.map.call(byteArray, function(byte) {
-    //           return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-    //       }).join('');
-    // }
     HomePage.prototype.toHexString = function (byteArray) {
         return Array.prototype.map.call(byteArray, function (b) {
             return ('00' + b.toString(16)).slice(-2).toString();
@@ -125,13 +125,13 @@ var HomePage = (function () {
     return HomePage;
 }());
 HomePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/'<ion-header>\n\n  <ion-navbar>\n      <ion-title>Ubirch App</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n   <ion-buttons>\n\n    <button ion-button full (click)="scan()">\n    Scan for BLE Devices\n    </button>\n\n    <button ion-button ArrayToString (click) = "convert()"> Convert </button>\n\n    </ion-buttons>\n\n   <ion-list> \n    <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n      <h2>{{ device.name || \'Unnamed\' }}</h2>\n      <p>{{ device.id }}</p>\n      <p>RSSI: {{ device.rssi }}</p>\n    </button>  \n   </ion-list>\n\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Ubirch App</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-buttons>\n\n        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>\n        <button ion-button ArrayToString (click) = "convert()"> Convert </button>\n\n    </ion-buttons>\n\n    <ion-list>\n        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n            <h2>{{ device.name || \'Unnamed\' }}</h2>\n            <p>{{ device.id }}</p>\n            <p>RSSI: {{ device.rssi }}</p>\n        </button>\n    </ion-list>\n\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar>\n        <p>{{ statusMessage }}</p>\n    </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* ToastController */],
-        __WEBPACK_IMPORTED_MODULE_0__ionic_native_ble__["a" /* BLE */],
-        __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* NgZone */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
+        __WEBPACK_IMPORTED_MODULE_3__ionic_native_ble__["a" /* BLE */],
+        __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
@@ -142,12 +142,10 @@ HomePage = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ed25519__ = __webpack_require__(265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ed25519___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ed25519__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -160,14 +158,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-// Bluetooth UUIDs
+/**
+ * Bluetooth UUIDs
+ **/
 var GENERIC_ACCESS_SERVICE = '1800';
 var DEVICE_NAME_CHARACTERISTIC = '2A00';
 var HANDSHAKE_SERVICE = '80E4196E-E6A2-4C5E-BD8D-090C2660D898';
 var SIGNATURE_CHARACTERISTIC = '80E4001-E6A2-4C5E-BD8D-090C2660D898';
 var PUBLIC_KEY_CHARACTERISTIC = '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
-// Message sent into the device
+/**
+ * Message sent into the device
+ */
 var message = "Hello Ubirch!";
 var DetailPage = (function () {
     function DetailPage(navCtrl, navParams, ble, alertCtrl, toastCtrl, ngZone) {
@@ -206,7 +207,9 @@ var DetailPage = (function () {
         });
         alert.present();
     };
-    // Disconnect peripheral when leaving the page
+    /**
+     * Disconnect peripheral when leaving the page
+     **/
     DetailPage.prototype.ionViewWillLeave = function () {
         var _this = this;
         console.log('ionViewWillLeave disconnecting Bluetooth');
@@ -219,7 +222,9 @@ var DetailPage = (function () {
             _this.statusMessage = message;
         });
     };
-    // The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
+    /**
+     * The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
+     **/
     DetailPage.prototype.stringToBytes = function (string) {
         var array = new Uint32Array(string.length);
         for (var i = 0, l = string.length; i < l; i++)
@@ -237,21 +242,6 @@ var DetailPage = (function () {
             return ('00' + b.toString(16)).slice(-2).toString();
         }).join('');
     };
-    //
-    // toArray( buffer ) {
-    //     var len = buffer.length;
-    //     var ret = [];
-    //     for (var i = len-1; i >= 0; i--) {
-    //         ret.push(buffer[i]);
-    //      }
-    //      return ret;
-    // };
-    //
-    // bin2String(array) {
-    //   var result = "";
-    //   for (var i = 0; i < array.length; i++) {result += String.fromCharCode(parseInt(array[i], 2)); }
-    //   return result;
-    // }
     DetailPage.prototype.writeMessage = function () {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, this.stringToBytes(message));
     };
@@ -262,25 +252,6 @@ var DetailPage = (function () {
     DetailPage.prototype.readPubKey = function () {
         var _this = this;
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toHexString(data)[0]); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
-    };
-    /**
-     * ED25519 :
-     * Verify(Buffer message, Buffer signature, Buffer publicKey)
-     * message: message the signature is for
-     * signature: signature to be verified
-     * publicKey: publicKey to the private key that created the signature
-     * returns: boolean
-     **/
-    DetailPage.prototype.verifySignature = function () {
-        var signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
-        if (__WEBPACK_IMPORTED_MODULE_3_ed25519__["ed25519"].Verify(new Buffer(message, 'utf8'), signature)) {
-            // Bob trusts the message because the Verify function returned true.
-            console.log('Signature valid');
-        }
-        else {
-            // Bob doesn't trust the message because the Verify function returned false.
-            console.log('Signature NOT valid');
-        }
     };
     return DetailPage;
 }());
@@ -293,17 +264,16 @@ DetailPage = __decorate([
 
 var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=detail.js.map
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(269).Buffer))
 
 /***/ }),
 
-/***/ 194:
+/***/ 196:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(215);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -311,18 +281,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 213:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_ble__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_ble__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(264);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_detail_detail__ = __webpack_require__(193);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -375,13 +345,13 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 262:
+/***/ 264:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(192);
@@ -419,20 +389,7 @@ MyApp = __decorate([
 
 //# sourceMappingURL=app.component.js.map
 
-/***/ }),
-
-/***/ 264:
-/***/ (function(module, exports) {
-
-function webpackEmptyContext(req) {
-	throw new Error("Cannot find module '" + req + "'.");
-}
-webpackEmptyContext.keys = function() { return []; };
-webpackEmptyContext.resolve = webpackEmptyContext;
-module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 264;
-
 /***/ })
 
-},[194]);
+},[196]);
 //# sourceMappingURL=main.js.map

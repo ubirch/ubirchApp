@@ -1,90 +1,89 @@
-import { BLE } from '@ionic-native/ble';
 import { Component, NgZone } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { DetailPage } from '../detail/detail';
-
-
+import { BLE } from '@ionic-native/ble';
 
 var byteArray = new Uint8Array([150 ,0x3d, 0xff, 0x00]);
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
+
 export class HomePage {
-  
-  devices: any[] = [];
-  statusMessage: string;
 
-  constructor(public navCtrl: NavController, 
-              private toastCtrl: ToastController,
-              private ble: BLE,
-              private ngZone: NgZone) { 
-  }
+    devices: any[] = [];
+    statusMessage: string;
 
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter');
-    this.scan();
-  }
+    constructor(public navCtrl: NavController,
+                private toastCtrl: ToastController,
+                private ble: BLE,
+                private ngZone: NgZone) {
+    }
 
-  scan() {
-    this.setStatus('Scanning for Bluetooth LE Devices');
-    this.devices = [];  // clear list
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter');
+        this.scan();
+    }
 
-    this.ble.scan([], 5).subscribe(
-      device => this.onDeviceDiscovered(device), 
-      error => this.scanError(error)
-    );
+    scan() {
+        this.setStatus('Scanning for Bluetooth LE Devices');
+        this.devices = [];  // clear list
 
-    setTimeout(this.setStatus.bind(this), 5000, 'Scan complete');
-  }
+        this.ble.scan([], 5).subscribe(
+            device => this.onDeviceDiscovered(device),
+            error => this.scanError(error)
+        );
 
-  onDeviceDiscovered(device) {
-    console.log('Discovered ' + JSON.stringify(device, null, 2));
-    this.ngZone.run(() => {
-      this.devices.push(device);
-    });
-  }
+        setTimeout(this.setStatus.bind(this), 5000, 'Scan complete');
+    }
 
-  // If location permission is denied, you'll end up here
-  scanError(error) {
-    this.setStatus('Error ' + error);
-    let toast = this.toastCtrl.create({
-      message: 'Error scanning for Bluetooth low energy devices',
-      position: 'middle',
-      duration: 5000
-    });
-    toast.present();
-  }
+    onDeviceDiscovered(device) {
+        console.log('Discovered ' + JSON.stringify(device, null, 2));
+        this.ngZone.run(() => {
+            this.devices.push(device);
+        });
+    }
 
-  setStatus(message) {
-    console.log(message);
-    this.ngZone.run(() => {
-      this.statusMessage = message;
-    });
-  }
+    /**
+     *     If location permission is denied, you'll end up here
+     */
 
-  deviceSelected(device) {
-    console.log(JSON.stringify(device) + ' selected');
-    this.navCtrl.push(DetailPage, {
-      device: device
-    });
-  }
+    scanError(error) {
+        this.setStatus('Error ' + error);
+        let toast = this.toastCtrl.create({
+            message: 'Error scanning for Bluetooth low energy devices',
+            position: 'middle',
+            duration: 5000
+        });
+        toast.present();
+    }
 
-  convert() {
+    setStatus(message) {
+        console.log(message);
+        this.ngZone.run(() => {
+            this.statusMessage = message;
+        });
+    }
 
-      var hexString = this.toHexString(byteArray);
-      var byteArray2 = this.toByteArray(hexString);
-      console.log(hexString)
+    deviceSelected(device) {
+        console.log(JSON.stringify(device) + ' selected');
+        this.navCtrl.push(DetailPage, {
+            device: device
+        });
+    }
 
-  }
+    /**
+     * This is just for testing byteArray conversion in hexString
+     */
 
-  // toHexString(byteArray) {
-  //       return Array.prototype.map.call(byteArray, function(byte) {
-  //           return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-  //       }).join('');
-  // }
+    convert() {
+        let hexString = this.toHexString(byteArray);
+        let byteArray2 = this.toByteArray(hexString);
+        console.log(hexString);
+        console.log(byteArray2);
+
+    }
 
     toHexString(byteArray) {
         return Array.prototype.map.call(byteArray,b =>
@@ -100,7 +99,7 @@ export class HomePage {
             hexString = hexString.substring(2, hexString.length);
             }
         return result;
-  }
+    }
 
 
 

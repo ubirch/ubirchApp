@@ -1,34 +1,31 @@
 <ion-header>
 
-  <ion-navbar>
-      <ion-title>Ubirch App</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Ubirch App</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-   <ion-buttons>
+    <ion-buttons>
 
-    <button ion-button full (click)="scan()">
-    Scan for BLE Devices
-    </button>
-
-    <button ion-button ArrayToString (click) = "convert()"> Convert </button>
+        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>
+        <button ion-button ArrayToString (click) = "convert()"> Convert </button>
 
     </ion-buttons>
 
-   <ion-list> 
-    <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
-      <h2>{{ device.name || 'Unnamed' }}</h2>
-      <p>{{ device.id }}</p>
-      <p>RSSI: {{ device.rssi }}</p>
-    </button>  
-   </ion-list>
+    <ion-list>
+        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
+            <h2>{{ device.name || 'Unnamed' }}</h2>
+            <p>{{ device.id }}</p>
+            <p>RSSI: {{ device.rssi }}</p>
+        </button>
+    </ion-list>
 
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <p>{{ statusMessage }}</p>
-  </ion-toolbar>
+    <ion-toolbar>
+        <p>{{ statusMessage }}</p>
+    </ion-toolbar>
 </ion-footer>

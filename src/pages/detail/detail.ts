@@ -1,10 +1,14 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
+
 import { BLE } from '@ionic-native/ble';
 import {ed25519} from 'ed25519';
 
 
-// Bluetooth UUIDs
+/**
+ * Bluetooth UUIDs
+ **/
+
 const GENERIC_ACCESS_SERVICE = '1800';
 const DEVICE_NAME_CHARACTERISTIC = '2A00';
 
@@ -13,8 +17,10 @@ const SIGNATURE_CHARACTERISTIC = '80E4001-E6A2-4C5E-BD8D-090C2660D898';
 const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
 
 
+/**
+ * Message sent into the device
+ */
 
-// Message sent into the device
 const message = "Hello Ubirch!";
 
 
@@ -23,6 +29,7 @@ const message = "Hello Ubirch!";
   selector: 'page-detail',
   templateUrl: 'detail.html',
 })
+
 export class DetailPage {
 
     peripheral: any = {};
@@ -71,7 +78,9 @@ export class DetailPage {
         alert.present();
     }
 
-    // Disconnect peripheral when leaving the page
+    /**
+     * Disconnect peripheral when leaving the page
+     **/
     ionViewWillLeave() {
         console.log('ionViewWillLeave disconnecting Bluetooth');
         this.ble.disconnect(this.peripheral.id).then(
@@ -88,11 +97,12 @@ export class DetailPage {
     }
 
 
-
-    // The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
+    /**
+     * The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
+     **/
 
     stringToBytes(string) {
-        var array = new Uint32Array(string.length);
+        let array = new Uint32Array(string.length);
         for (var i = 0, l = string.length; i < l; i++);{
             array[i] = string.charCodeAt(i);
         }
@@ -109,29 +119,10 @@ export class DetailPage {
         ).join('');
     }
 
-    //
-    // toArray( buffer ) {
-    //     var len = buffer.length;
-    //     var ret = [];
-    //     for (var i = len-1; i >= 0; i--) {
-    //         ret.push(buffer[i]);
-    //      }
-    //      return ret;
-    // };
-    //
-    // bin2String(array) {
-    //   var result = "";
-    //   for (var i = 0; i < array.length; i++) {result += String.fromCharCode(parseInt(array[i], 2)); }
-    //   return result;
-    // }
-
-
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message) )
+            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message) );
     }
-
-
 
     readName() {
         this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
@@ -158,22 +149,19 @@ export class DetailPage {
  * returns: boolean
  **/
 
-    verifySignature() {
-        var signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
-        var pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC;
-
-        if (ed25519.Verify(new Buffer(message, 'utf8'), signature, pubKey )) {
-            console.log('Signature valid');
-            this.showAlert('Success!', 'The signature is valid !');
-        } else {
-            console.log('Signature NOT valid');
-            this.showAlert('Error', 'Signature NOT Valid')
-
-        }
-    }
-
-
-
+    // verifySignature() {
+    //     let signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
+    //     let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
+    //
+    //     if (ed25519.verify(new Buffer(message, 'utf8'), signature, pubKey )) {
+    //         console.log('Signature valid');
+    //         this.showAlert('Success!', 'The signature is valid !');
+    //     } else {
+    //         console.log('Signature NOT valid');
+    //         this.showAlert('Error', 'Signature NOT Valid');
+    //
+    //     }
+    // }
 
 }
 
