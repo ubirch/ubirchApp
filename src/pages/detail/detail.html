@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ peripheral.name || 'Device' }}</ion-title>
+      <script src = '../../ed25519.nacl.js'> </script>
+      <script src = '../../ed25519.nacl-fast.js'> </script>
+
+
+
+      <ion-title>{{ peripheral.name || 'Device' }}</ion-title>
       <button ion-button (click) = "writeMessage()">
           Write Random Message
       </button>
@@ -12,9 +17,10 @@
       <button ion-button (click) = "verifySignature()">
           Verify Signature
       </button>
-    <button ion-button (click) = "readSignature()">
-      Read Signature
-    </button>
+
+      <button ion-button (click) = "readSignature()">
+          Read Signature
+      </button>
 
   </ion-navbar>
 </ion-header>

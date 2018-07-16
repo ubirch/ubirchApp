@@ -2,15 +2,12 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 
 import { BLE } from '@ionic-native/ble';
-import {ed25519} from 'ed25519';
+
 
 
 /**
  * Bluetooth UUIDs
  **/
-
-const GENERIC_ACCESS_SERVICE = '1800';
-const DEVICE_NAME_CHARACTERISTIC = '2A00';
 
 const HANDSHAKE_SERVICE = '80E4196E-E6A2-4C5E-BD8D-090C2660D898';
 const SIGNATURE_CHARACTERISTIC = '80E4001-E6A2-4C5E-BD8D-090C2660D898';
@@ -21,7 +18,8 @@ const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
  * Message sent into the device
  */
 
-const message = "Hello Ubirch!";
+var message = new Uint8Array(1);
+message[0] = 42;
 
 
 
@@ -33,6 +31,8 @@ const message = "Hello Ubirch!";
 export class DetailPage {
 
     peripheral: any = {};
+    signature: ArrayBuffer;
+    pubkey: ArrayBuffer;
     statusMessage: string;
 
     constructor(public navCtrl: NavController,
@@ -101,17 +101,19 @@ export class DetailPage {
      * The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
      **/
 
-    stringToBytes(string) {
-        let array = new Uint32Array(string.length);
-        for (var i = 0, l = string.length; i < l; i++);{
-            array[i] = string.charCodeAt(i);
-        }
-        return array.buffer;
-    }
+    // stringToBytes(string) {
+    //     let array = new Uint32Array(string.length);
+    //     for (var i = 0, l = string.length; i < l; i++);{
+    //         array[i] = string.charCodeAt(i);
+    //     }
+    //     return array.buffer;
+    // }
+    //
+    // bytesToString(buffer) {
+    //     return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    // }
 
-    bytesToString(buffer) {
-        return String.fromCharCode.apply(null, new Uint8Array(buffer));
-    }
+
 
     toHexString(byteArray) {
         return Array.prototype.map.call(byteArray,b =>
@@ -119,12 +121,12 @@ export class DetailPage {
         ).join('');
     }
 
+
+
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message) );
+            SIGNATURE_CHARACTERISTIC, message.buffer);
     }
-
-
 
     readPubKey() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
@@ -140,25 +142,28 @@ export class DetailPage {
         )
     }
 /**
- * ED25519 :
- * Verify(Buffer message, Buffer signature, Buffer publicKey)
- * message: message the signature is for
- * signature: signature to be verified
- * publicKey: publicKey to the private key that created the signature
- * returns: boolean
+ *  nacl :
+ *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
  **/
 
     verifySignature() {
-        let signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
-        let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
+            data => this.pubkey = data,
+            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+        );
 
-        if (ed25519.verify(new Buffer(message, 'utf8'), signature, pubKey )) {
-            console.log('Signature valid');
-            this.showAlert('Success!', 'The signature is valid !');
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
+            data => this.signature = data,
+            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+        );
+
+        if (nacl.sign.detached.verify(message, new Uint8Array(this.signature), new Uint8Array(this.pubkey))) {
+             console.log('Signature valid');
+             this.showAlert('Success!', 'The signature is valid !');
+
         } else {
             console.log('Signature NOT valid');
             this.showAlert('Error', 'Signature NOT Valid');
-
         }
     }
 

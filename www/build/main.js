@@ -148,12 +148,10 @@ var _a, _b, _c, _d;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ed25519__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ed25519___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ed25519__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -166,19 +164,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 /**
  * Bluetooth UUIDs
  **/
-var GENERIC_ACCESS_SERVICE = '1800';
-var DEVICE_NAME_CHARACTERISTIC = '2A00';
 var HANDSHAKE_SERVICE = '80E4196E-E6A2-4C5E-BD8D-090C2660D898';
 var SIGNATURE_CHARACTERISTIC = '80E4001-E6A2-4C5E-BD8D-090C2660D898';
 var PUBLIC_KEY_CHARACTERISTIC = '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
 /**
  * Message sent into the device
  */
-var message = "Hello Ubirch!";
+var message = new Uint8Array(1);
+message[0] = 42;
 var DetailPage = (function () {
     function DetailPage(navCtrl, navParams, ble, alertCtrl, toastCtrl, ngZone) {
         var _this = this;
@@ -234,25 +230,24 @@ var DetailPage = (function () {
     /**
      * The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
      **/
-    DetailPage.prototype.stringToBytes = function (string) {
-        var array = new Uint32Array(string.length);
-        for (var i = 0, l = string.length; i < l; i++)
-            ;
-        {
-            array[i] = string.charCodeAt(i);
-        }
-        return array.buffer;
-    };
-    DetailPage.prototype.bytesToString = function (buffer) {
-        return String.fromCharCode.apply(null, new Uint8Array(buffer));
-    };
+    // stringToBytes(string) {
+    //     let array = new Uint32Array(string.length);
+    //     for (var i = 0, l = string.length; i < l; i++);{
+    //         array[i] = string.charCodeAt(i);
+    //     }
+    //     return array.buffer;
+    // }
+    //
+    // bytesToString(buffer) {
+    //     return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    // }
     DetailPage.prototype.toHexString = function (byteArray) {
         return Array.prototype.map.call(byteArray, function (b) {
             return ('00' + b.toString(16)).slice(-2).toString();
         }).join('');
     };
     DetailPage.prototype.writeMessage = function () {
-        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, this.stringToBytes(message));
+        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, message.buffer);
     };
     DetailPage.prototype.readPubKey = function () {
         var _this = this;
@@ -263,17 +258,14 @@ var DetailPage = (function () {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Characterisctic = ' + _this.toHexString(new Uint8Array(data))); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
     /**
-     * ED25519 :
-     * Verify(Buffer message, Buffer signature, Buffer publicKey)
-     * message: message the signature is for
-     * signature: signature to be verified
-     * publicKey: publicKey to the private key that created the signature
-     * returns: boolean
+     *  nacl :
+     *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
      **/
     DetailPage.prototype.verifySignature = function () {
-        var signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
-        var pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
-        if (__WEBPACK_IMPORTED_MODULE_3_ed25519__["ed25519"].verify(new Buffer(message, 'utf8'), signature, pubKey)) {
+        var _this = this;
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.pubkey = data; }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(function (data) { return _this.signature = data; }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
+        if (nacl.sign.detached.verify(message, new Uint8Array(this.signature), new Uint8Array(this.pubkey))) {
             console.log('Signature valid');
             this.showAlert('Success!', 'The signature is valid !');
         }
@@ -286,14 +278,13 @@ var DetailPage = (function () {
 }());
 DetailPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-detail',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>{{ peripheral.name || \'Device\' }}</ion-title>\n      <button ion-button (click) = "writeMessage()">\n          Write Random Message\n      </button>\n\n      <button ion-button (click) = "readPubKey()">\n          Read PubKey\n      </button>\n\n      <button ion-button (click) = "verifySignature()">\n          Verify Signature\n      </button>\n    <button ion-button (click) = "readSignature()">\n      Read Signature\n    </button>\n\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="padding">\n  <ion-card>\n    <ion-card-header>\n      {{ peripheral.name || \'Unnamed\' }}\n    </ion-card-header>\n    <ion-card-content>\n      {{ peripheral.id }}\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header align-self-center>\n      Services\n    </ion-card-header>\n\n    <ion-list>\n      <ion-item *ngFor="let service of peripheral.services">\n        {{service}}\n      </ion-item>\n    </ion-list>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header>\n      Details\n    </ion-card-header>\n    <ion-card-content>\n      <pre>{{peripheral | json }}</pre>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/,
+        selector: 'page-detail',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar>\n      <script src = \'../../ed25519.nacl.js\'> </script>\n      <script src = \'../../ed25519.nacl-fast.js\'> </script>\n\n\n\n      <ion-title>{{ peripheral.name || \'Device\' }}</ion-title>\n      <button ion-button (click) = "writeMessage()">\n          Write Random Message\n      </button>\n\n      <button ion-button (click) = "readPubKey()">\n          Read PubKey\n      </button>\n\n      <button ion-button (click) = "verifySignature()">\n          Verify Signature\n      </button>\n\n      <button ion-button (click) = "readSignature()">\n          Read Signature\n      </button>\n\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="padding">\n  <ion-card>\n    <ion-card-header>\n      {{ peripheral.name || \'Unnamed\' }}\n    </ion-card-header>\n    <ion-card-content>\n      {{ peripheral.id }}\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header align-self-center>\n      Services\n    </ion-card-header>\n\n    <ion-list>\n      <ion-item *ngFor="let service of peripheral.services">\n        {{service}}\n      </ion-item>\n    </ion-list>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header>\n      Details\n    </ion-card-header>\n    <ion-card-content>\n      <pre>{{peripheral | json }}</pre>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__["a" /* BLE */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */]) === "function" && _f || Object])
 ], DetailPage);
 
 var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=detail.js.map
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(264).Buffer))
 
 /***/ }),
 
@@ -418,19 +409,6 @@ MyApp = __decorate([
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 263:
-/***/ (function(module, exports) {
-
-function webpackEmptyContext(req) {
-	throw new Error("Cannot find module '" + req + "'.");
-}
-webpackEmptyContext.keys = function() { return []; };
-webpackEmptyContext.resolve = webpackEmptyContext;
-module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 263;
 
 /***/ })
 
