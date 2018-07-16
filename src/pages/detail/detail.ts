@@ -126,7 +126,7 @@ export class DetailPage {
 
     readName() {
         this.ble.read(this.peripheral.id, GENERIC_ACCESS_SERVICE, DEVICE_NAME_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = '+ this.bytesToString(data)),
+            data => this.showAlert('Success !', 'Characterisctic = '+ typeof(data) + this.bytesToString(data)),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
         )
     }
