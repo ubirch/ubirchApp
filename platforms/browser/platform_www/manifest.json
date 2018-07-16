@@ -1,6 +1,6 @@
 {
-  "name": "Connect",
-  "short_name": "Connect",
+  "name": "Ubirch App",
+  "short_name": "Ubirch App",
   "description": "Description of your app from template",
   "start_url": "index.html",
   "scope": "index.html",

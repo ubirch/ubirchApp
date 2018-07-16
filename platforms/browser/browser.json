@@ -19,28 +19,28 @@
   },
   "installed_plugins": {
     "cordova-plugin-compat": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "cordova-plugin-ble-central": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "cordova-plugin-console": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.example.ble.connect"
+      "PACKAGE_NAME": "com.ubirch.ubirchapp"
     }
   },
   "dependent_plugins": {},

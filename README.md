@@ -1,7 +1,6 @@
 # Ubirch Hybrid Mobile Application
 
-Scan for and connect to the Bluetooth Low Energy device
-
+Scan for and connects to BLE peripherals in order to do a cryptographic handshake
 
 ## Ionic 3
 
