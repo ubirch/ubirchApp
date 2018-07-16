@@ -1,6 +1,6 @@
 {
   "name": "Ubirch App",
-  "app_id": "com.example.ble.connect",
+  "app_id": "com.ubirch.ubirchapp",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
