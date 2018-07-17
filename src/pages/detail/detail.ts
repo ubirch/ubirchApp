@@ -19,8 +19,7 @@ const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
  * Message sent into the device
  */
 
-var message = new Uint8Array(1);
-message[0] = 42;
+var message = new Uint8Array([42]);
 
 
 
@@ -126,19 +125,23 @@ export class DetailPage {
 
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-            SIGNATURE_CHARACTERISTIC, message.buffer);
+            SIGNATURE_CHARACTERISTIC, message.buffer).then(
+            data => this.showAlert('Success !', 'Written = ' + this.toHexString(new Uint8Array(data))),
+            () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
+
+        );
     }
 
     readPubKey() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = ' + this.toHexString(new Uint8Array(data))),
-            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+            data => this.showAlert('Success !', 'Public key = ' + this.toHexString(new Uint8Array(data))),
+            () => this.showAlert('Unexpected Error', 'Failed to read the public key')
         )
     }
 
     readSignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
-            data => this.showAlert('Success !', 'Characterisctic = ' + this.toHexString(new Uint8Array(data))),
+            data => this.showAlert('Success !', 'Signature = ' + this.toHexString(new Uint8Array(data))),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
         )
     }
@@ -150,7 +153,7 @@ export class DetailPage {
     verifySignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
             data => this.pubkey = data,
-            () => this.showAlert('Unexpected Error', 'Failed to read signature')
+            () => this.showAlert('Unexpected Error', 'Failed to read the pubkey')
         );
 
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(

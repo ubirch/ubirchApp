@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/Ubirch App.app</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.ubirch.ubirchapp</string>
+		<key>CFBundleShortVersionString</key>
+		<string>0.0.1</string>
+		<key>CFBundleVersion</key>
+		<string>0.0.1</string>
+		<key>SigningIdentity</key>
+		<string>iPhone Developer: Testa Rossa (L58KX34KC3)</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2018-07-17T09:28:59Z</date>
+	<key>Name</key>
+	<string>Ubirch App</string>
+	<key>SchemeName</key>
+	<string>Ubirch App</string>
+</dict>
+</plist>
