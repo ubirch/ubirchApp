@@ -19,7 +19,7 @@ const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
  * Message sent into the device
  */
 
-var message = new Uint8Array([42]);
+const message = new Uint8Array([42]);
 
 
 

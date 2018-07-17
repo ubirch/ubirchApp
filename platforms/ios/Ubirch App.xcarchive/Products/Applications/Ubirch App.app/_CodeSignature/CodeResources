@@ -98,11 +98,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		sYmnqMi7WLC/nzFz7m2Pj319o1A=
+		Iz8Q5bRxI4lsdOuilWHjeRB2qPc=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		Q2bs8LiYuJ9uyVuI+Wt9B1O7N8U=
+		FPHtBA+aqTrmXjiniZluQEpANNQ=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -110,7 +110,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		KQBmqFlH9NvZx2cAwW0JRDgT/1Q=
+		fsQvt+31/SoxDsmki3xNo2r8I3o=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -182,7 +182,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		m9JwUMz/+RlbL9Y7XX0XkwDzBo0=
+		QnIegQaJ6WqD2Y1mLgCWefN916k=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -190,7 +190,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		FyZ0+IV4deiaKBQBYcINUozN9ag=
+		BF04IyhAecJZethIFNPFNxw0ct0=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -254,7 +254,7 @@
 		</data>
 		<key>www/build/main.js.map</key>
 		<data>
-		tLqdDtY/GOImD7VmiRUBLM+ieoo=
+		KqaoRd/wjm4P5dAlixVQtWKQ2fY=
 		</data>
 		<key>www/build/polyfills.js</key>
 		<data>
@@ -588,22 +588,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sYmnqMi7WLC/nzFz7m2Pj319o1A=
+			Iz8Q5bRxI4lsdOuilWHjeRB2qPc=
 			</data>
 			<key>hash2</key>
 			<data>
-			1NelTpGmGiqInEdhsGzagyxHJ6PpB+CxIQAgwPVyLTk=
+			H9Yp0m1V53F2GYi33n4ujn6KgHHx/f7HxEf/mwDnW6k=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Q2bs8LiYuJ9uyVuI+Wt9B1O7N8U=
+			FPHtBA+aqTrmXjiniZluQEpANNQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			BwWJ5Iu+yHtvODjLk2RSRvurF2MThDPOPx2gTOhnPwQ=
+			mvprbs3vPdY+1g8FWx7nQFnFMbNYyZpu4MVTTKtaX2I=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -621,11 +621,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KQBmqFlH9NvZx2cAwW0JRDgT/1Q=
+			fsQvt+31/SoxDsmki3xNo2r8I3o=
 			</data>
 			<key>hash2</key>
 			<data>
-			x7HtygwP3Z/MvZIAcL7SLJ9vDLOs4u5ZtPawy3fZvBE=
+			Er4lo1vKgXsi81uPP24svlutzelay+iTBdCDK9esKxI=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -808,22 +808,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			m9JwUMz/+RlbL9Y7XX0XkwDzBo0=
+			QnIegQaJ6WqD2Y1mLgCWefN916k=
 			</data>
 			<key>hash2</key>
 			<data>
-			Lr6/MI89XPW+hoYvjHE/PalJlTeiwKWCznBw4ks1hus=
+			Y4j67e//sNfufRSHSCe5OoeUbxESoeFwX1UIqCyuzIE=
 			</data>
 		</dict>
 		<key>config.xml</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FyZ0+IV4deiaKBQBYcINUozN9ag=
+			BF04IyhAecJZethIFNPFNxw0ct0=
 			</data>
 			<key>hash2</key>
 			<data>
-			KOla55stGHlCffmWp72YIep1qxsoaG4IH0Yggfb2K7Y=
+			pI6XAJQGMXGrCS1HNvvFCpkorAoZSPZvvaVtOCf9ink=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
@@ -995,11 +995,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tLqdDtY/GOImD7VmiRUBLM+ieoo=
+			KqaoRd/wjm4P5dAlixVQtWKQ2fY=
 			</data>
 			<key>hash2</key>
 			<data>
-			nyDPQVUlkxSyd+9ekBADc2ZpUA/6lH32iEuTB7vCxMU=
+			wuCm3QqjJvMwTpqVuVQwl5VXp4jkDjn2nm7b/rEFBAE=
 			</data>
 		</dict>
 		<key>www/build/polyfills.js</key>
