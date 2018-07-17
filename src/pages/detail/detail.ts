@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 
 import { BLE } from '@ionic-native/ble';
+import * as nacl from 'tweetnacl';
 
 
 
