@@ -254,9 +254,14 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.writeMessage = function () {
         var _this = this;
-        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(function (data) { return _this.showAlert('Success !', 'Written = ' + message2); }),
-            function () { return _this.showAlert('Unexpected Error', 'Failed to write to the characteristic'); };
+        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(function (data) { return _this.showAlert('Success !', 'Written = ' + message2); }, function () { return _this.showAlert('Unexpected Error', 'Failed to write to the characteristic'); });
     };
+    // writeMessage() {
+    //     this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
+    //         SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
+    //         data => this.showAlert('Success !', 'Written = ' + this.toHexString(message)),
+    //         () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic');
+    // }
     DetailPage.prototype.readPubKey = function () {
         var _this = this;
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Public key = ' + _this.toHexString(new Uint8Array(data))); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read the public key'); });
