@@ -125,11 +125,9 @@ export class DetailPage {
 
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2).then(
+            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
             data => this.showAlert('Success !', 'Written = ' + message2)),
-            () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
-
-        );
+            () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic');
     }
 
     readPubKey() {
