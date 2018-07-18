@@ -2,12 +2,10 @@
   "cordova-plugin-ble-central": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-ble-central@^1.1.4"
+      "id": "cordova-plugin-ble-central@^1.2.2"
     },
     "is_top_level": true,
-    "variables": {
-      "BLUETOOTH_USAGE_DESCRIPTION": " "
-    }
+    "variables": {}
   },
   "cordova-plugin-compat": {
     "source": {
