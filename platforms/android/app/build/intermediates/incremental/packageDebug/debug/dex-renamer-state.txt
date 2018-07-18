@@ -1,4 +1,4 @@
-#Mon Jul 16 15:16:25 CEST 2018
+#Wed Jul 18 15:20:24 CEST 2018
 base.0=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
 file.0=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

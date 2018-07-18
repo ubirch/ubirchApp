@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 16 15:16:25 CEST 2018
+#Wed Jul 18 15:20:25 CEST 2018
 5.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_
 42.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug
 32.set=ASSET
@@ -36,7 +36,7 @@
 2.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_
 29.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/build/main.css.map
 11.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/manifest.json
-39.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/mipmap-mdpi-v4/icon.png
+39.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-port-ldpi-v4/screen.png
 6.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug
 43.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_
 4.set=ASSET
@@ -97,7 +97,7 @@ count=48
 14.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug
 47.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/cordova_plugins.js
 23.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/plugins/cordova-plugin-device/www/device.js
-33.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-port-hdpi-v4/screen.png
+33.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-land-xhdpi-v4/screen.png
 6.set=ASSET
 17.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/cordova-js-src/android/promptbasednativeapi.js
 0.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_
@@ -137,11 +137,11 @@ count=48
 30.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/plugins/cordova-plugin-splashscreen/www/splashscreen.js
 14.set=ASSET
 24.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/cordova.js
-34.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-land-xhdpi-v4/screen.png
+34.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-port-hdpi-v4/screen.png
 18.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/plugins/cordova-plugin-statusbar/www/statusbar.js
 1.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug
 28.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug/www/build/vendor.js.map
 10.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-land-ldpi-v4/screen.png
 5.set=ANDROID_RESOURCE
-38.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/drawable-port-ldpi-v4/screen.png
+38.file=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_/res/mipmap-mdpi-v4/icon.png
 43.set=ANDROID_RESOURCE
