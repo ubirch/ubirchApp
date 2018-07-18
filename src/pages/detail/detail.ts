@@ -20,7 +20,7 @@ const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
  */
 
 var message = new Uint8Array([42]);
-
+var message2 = "Hello";
 
 
 @Component({
@@ -101,17 +101,17 @@ export class DetailPage {
      * The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
      **/
 
-    // stringToBytes(string) {
-    //     let array = new Uint32Array(string.length);
-    //     for (var i = 0, l = string.length; i < l; i++);{
-    //         array[i] = string.charCodeAt(i);
-    //     }
-    //     return array.buffer;
-    // }
-    //
-    // bytesToString(buffer) {
-    //     return String.fromCharCode.apply(null, new Uint8Array(buffer));
-    // }
+    stringToBytes(string) {
+        let array = new Uint32Array(string.length);
+        for (var i = 0, l = string.length; i < l; i++);{
+            array[i] = string.charCodeAt(i);
+        }
+        return array.buffer;
+    }
+
+    bytesToString(buffer) {
+        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    }
 
 
 
@@ -126,7 +126,7 @@ export class DetailPage {
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
             SIGNATURE_CHARACTERISTIC, message.buffer).then(
-            data => this.showAlert('Success !', 'Written = ' + this.toHexString(new Uint8Array(data))),
+            data => this.showAlert('Success !', 'Written = ' + this.stringToBytes(message2)),
             () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
 
         );
