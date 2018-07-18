@@ -3,8 +3,11 @@ import { NavController, NavParams, ToastController, AlertController} from 'ionic
 
 import { BLE } from '@ionic-native/ble';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import * as nacl from 'tweetnacl';
 
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 =======
 >>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 
@@ -163,6 +166,7 @@ export class DetailPage {
  **/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     verifySignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
             data => this.pubkey = data,
@@ -184,6 +188,8 @@ export class DetailPage {
         }
     }
 =======
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
     // verifySignature() {
     //     let signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
     //     let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
@@ -197,6 +203,9 @@ export class DetailPage {
     //
     //     }
     // }
+<<<<<<< HEAD
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
+=======
 >>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 
 }

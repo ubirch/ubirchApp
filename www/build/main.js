@@ -155,8 +155,11 @@ HomePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_ble__ = __webpack_require__(99);
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_tweetnacl__ = __webpack_require__(262);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_tweetnacl___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_tweetnacl__);
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 =======
 >>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -275,6 +278,7 @@ var DetailPage = (function () {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Signature = ' + _this.toHexString(new Uint8Array(data))); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read signature'); });
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      *  nacl library  :
      *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;git
@@ -292,6 +296,8 @@ var DetailPage = (function () {
             this.showAlert('Error', 'Signature NOT Valid');
         }
     };
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 =======
 >>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
     return DetailPage;
@@ -435,6 +441,7 @@ MyApp = __decorate([
 //# sourceMappingURL=app.component.js.map
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ }),
 
 /***/ 263:
@@ -442,6 +449,8 @@ MyApp = __decorate([
 
 /* (ignored) */
 
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 =======
 >>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 /***/ })
