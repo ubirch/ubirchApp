@@ -134,18 +134,18 @@ export class DetailPage {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
             data => this.showAlert('Success !', 'Public key = ' + this.toHexString(new Uint8Array(data))),
             () => this.showAlert('Unexpected Error', 'Failed to read the public key')
-        )
+        );
     }
 
     readSignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC).then(
             data => this.showAlert('Success !', 'Signature = ' + this.toHexString(new Uint8Array(data))),
             () => this.showAlert('Unexpected Error', 'Failed to read signature')
-        )
+        );
     }
 /**
  *  nacl :
- *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
+ *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;git
  **/
 
     verifySignature() {
