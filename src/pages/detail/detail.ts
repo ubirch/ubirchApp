@@ -11,7 +11,7 @@ import * as nacl from 'tweetnacl';
  **/
 
 const HANDSHAKE_SERVICE = '80E4196E-E6A2-4C5E-BD8D-090C2660D898';
-const SIGNATURE_CHARACTERISTIC = '80E4001-E6A2-4C5E-BD8D-090C2660D898';
+const SIGNATURE_CHARACTERISTIC = '80E40001-E6A2-4C5E-BD8D-090C2660D898';
 const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
 
 
@@ -19,7 +19,8 @@ const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
  * Message sent into the device
  */
 
-var message = new Uint8Array([42]);
+var message = new Uint8Array([0xFF]);
+
 var message2 = "Hello";
 
 
@@ -122,23 +123,23 @@ export class DetailPage {
     }
 
 
-    //
-    // writeMessage() {
-    //     this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-    //         SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
-    //         data => this.showAlert('Success !', 'Written = ' + message2),
-    //         () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
-    //     );
-    // }
 
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
-            data => this.showAlert('Success !', 'Written = ' + this.toHexString(data)),
-
+            SIGNATURE_CHARACTERISTIC, message.buffer).then(
+            data => this.showAlert('Success !', 'Written = ' + this.bytesToString(message.buffer)),
             () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
         );
     }
+
+    // writeMessage() {
+    //     this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
+    //         SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
+    //         data => this.showAlert('Success !', 'Written = ' + message2)),
+    //
+    //         () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
+    //     );
+    // }
 
     readPubKey() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
@@ -154,7 +155,7 @@ export class DetailPage {
         );
     }
 /**
- *  nacl :
+ *  nacl library  :
  *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;git
  **/
 
