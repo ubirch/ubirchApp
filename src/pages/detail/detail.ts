@@ -130,12 +130,12 @@ export class DetailPage {
             () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic');
     }
 
-    writeMessage() {
-        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-            SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
-            data => this.showAlert('Success !', 'Written = ' + message2)),
-            () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic');
-    }
+    // writeMessage() {
+    //     this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
+    //         SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
+    //         data => this.showAlert('Success !', 'Written = ' + this.toHexString(message)),
+    //         () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic');
+    // }
 
     readPubKey() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
