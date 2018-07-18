@@ -112841,6 +112841,7 @@ var IonicNativePlugin = (function () {
 
 //# sourceMappingURL=ionic-native-plugin.js.map
 
+<<<<<<< HEAD
 /***/ }),
 /* 261 */,
 /* 262 */
@@ -115236,6 +115237,8 @@ nacl.setPRNG = function(fn) {
 })(typeof module !== 'undefined' && module.exports ? module.exports : (self.nacl = self.nacl || {}));
 
 
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 /***/ })
 /******/ ]);
 //# sourceMappingURL=vendor.js.map

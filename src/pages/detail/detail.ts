@@ -2,8 +2,11 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 
 import { BLE } from '@ionic-native/ble';
+<<<<<<< HEAD
 import * as nacl from 'tweetnacl';
 
+=======
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 
 
 /**
@@ -159,6 +162,7 @@ export class DetailPage {
  *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;git
  **/
 
+<<<<<<< HEAD
     verifySignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
             data => this.pubkey = data,
@@ -179,6 +183,21 @@ export class DetailPage {
             this.showAlert('Error', 'Signature NOT Valid');
         }
     }
+=======
+    // verifySignature() {
+    //     let signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
+    //     let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
+    //
+    //     if (ed25519.verify(new Buffer(message, 'utf8'), signature, pubKey )) {
+    //         console.log('Signature valid');
+    //         this.showAlert('Success!', 'The signature is valid !');
+    //     } else {
+    //         console.log('Signature NOT valid');
+    //         this.showAlert('Error', 'Signature NOT Valid');
+    //
+    //     }
+    // }
+>>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
 
 }
 
