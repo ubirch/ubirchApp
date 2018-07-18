@@ -179,6 +179,7 @@ var PUBLIC_KEY_CHARACTERISTIC = '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
  * Message sent into the device
  */
 var message = new Uint8Array([42]);
+var message2 = "Hello";
 var DetailPage = (function () {
     function DetailPage(navCtrl, navParams, ble, alertCtrl, toastCtrl, ngZone) {
         var _this = this;
@@ -234,17 +235,18 @@ var DetailPage = (function () {
     /**
      * The BLE plugin uses typed Arrays or ArrayBuffers for sending and receiving data
      **/
-    // stringToBytes(string) {
-    //     let array = new Uint32Array(string.length);
-    //     for (var i = 0, l = string.length; i < l; i++);{
-    //         array[i] = string.charCodeAt(i);
-    //     }
-    //     return array.buffer;
-    // }
-    //
-    // bytesToString(buffer) {
-    //     return String.fromCharCode.apply(null, new Uint8Array(buffer));
-    // }
+    DetailPage.prototype.stringToBytes = function (string) {
+        var array = new Uint32Array(string.length);
+        for (var i = 0, l = string.length; i < l; i++)
+            ;
+        {
+            array[i] = string.charCodeAt(i);
+        }
+        return array.buffer;
+    };
+    DetailPage.prototype.bytesToString = function (buffer) {
+        return String.fromCharCode.apply(null, new Uint8Array(buffer));
+    };
     DetailPage.prototype.toHexString = function (byteArray) {
         return Array.prototype.map.call(byteArray, function (b) {
             return ('00' + b.toString(16)).slice(-2).toString();
@@ -252,8 +254,14 @@ var DetailPage = (function () {
     };
     DetailPage.prototype.writeMessage = function () {
         var _this = this;
-        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, message.buffer).then(function (data) { return _this.showAlert('Success !', 'Written = ' + _this.toHexString(new Uint8Array(data))); }, function () { return _this.showAlert('Unexpected Error', 'Failed to write to the characteristic'); });
+        this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(function (data) { return _this.showAlert('Success !', 'Written = ' + message2); }, function () { return _this.showAlert('Unexpected Error', 'Failed to write to the characteristic'); });
     };
+    // writeMessage() {
+    //     this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
+    //         SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
+    //         data => this.showAlert('Success !', 'Written = ' + this.toHexString(message)),
+    //         () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic');
+    // }
     DetailPage.prototype.readPubKey = function () {
         var _this = this;
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(function (data) { return _this.showAlert('Success !', 'Public key = ' + _this.toHexString(new Uint8Array(data))); }, function () { return _this.showAlert('Unexpected Error', 'Failed to read the public key'); });
@@ -264,7 +272,7 @@ var DetailPage = (function () {
     };
     /**
      *  nacl :
-     *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;
+     *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;git
      **/
     DetailPage.prototype.verifySignature = function () {
         var _this = this;
@@ -283,7 +291,7 @@ var DetailPage = (function () {
 }());
 DetailPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-detail',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar>\n      <ion-title>{{ peripheral.name || \'Device\' }}</ion-title>\n      <button ion-button (click) = "writeMessage()">\n          Write Random Message\n      </button>\n\n      <button ion-button (click) = "readPubKey()">\n          Read PubKey\n      </button>\n\n      <button ion-button (click) = "verifySignature()">\n          Verify Signature\n      </button>\n\n      <button ion-button (click) = "readSignature()">\n          Read Signature\n      </button>\n\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="padding">\n  <ion-card>\n    <ion-card-header>\n      {{ peripheral.name || \'Unnamed\' }}\n    </ion-card-header>\n    <ion-card-content>\n      {{ peripheral.id }}\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header align-self-center>\n      Services\n    </ion-card-header>\n\n    <ion-list>\n      <ion-item *ngFor="let service of peripheral.services">\n        {{service}}\n      </ion-item>\n    </ion-list>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header>\n      Details\n    </ion-card-header>\n    <ion-card-content>\n      <pre>{{peripheral | json }}</pre>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/,
+        selector: 'page-detail',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/'<ion-header>\n  <ion-navbar>\n      <ion-title>{{ peripheral.name || \'Device\' }}</ion-title>\n      <button ion-button (click) = "writeMessage()">\n          Write Message\n      </button>\n\n      <button ion-button (click) = "readPubKey()">\n          Read PubKey\n      </button>\n\n      <button ion-button (click) = "verifySignature()">\n          Verify Signature\n      </button>\n\n      <button ion-button (click) = "readSignature()">\n          Read Signature\n      </button>\n\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="padding">\n  <ion-card>\n    <ion-card-header>\n      {{ peripheral.name || \'Unnamed\' }}\n    </ion-card-header>\n    <ion-card-content>\n      {{ peripheral.id }}\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header align-self-center>\n      Services\n    </ion-card-header>\n\n    <ion-list>\n      <ion-item *ngFor="let service of peripheral.services">\n        {{service}}\n      </ion-item>\n    </ion-list>\n  </ion-card>\n\n  <ion-card>\n    <ion-card-header>\n      Details\n    </ion-card-header>\n    <ion-card-content>\n      <pre>{{peripheral | json }}</pre>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <p>{{ statusMessage }}</p>\n  </ion-toolbar>\n\n</ion-footer>\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/detail/detail.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */],
