@@ -56,7 +56,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var byteArray = new Uint8Array([150, 0x3d, 0xff, 0x00]);
 var HomePage = (function () {
     function HomePage(navCtrl, toastCtrl, ble, ngZone) {
         this.navCtrl = navCtrl;
@@ -108,33 +107,11 @@ var HomePage = (function () {
             device: device
         });
     };
-    /**
-     * This is just for testing byteArray conversion in hexString
-     */
-    HomePage.prototype.convert = function () {
-        var hexString = this.toHexString(byteArray);
-        var byteArray2 = this.toByteArray(hexString);
-        console.log(hexString);
-        console.log(byteArray2);
-    };
-    HomePage.prototype.toHexString = function (byteArray) {
-        return Array.prototype.map.call(byteArray, function (b) {
-            return ('00' + b.toString(16)).slice(-2).toString();
-        }).join('');
-    };
-    HomePage.prototype.toByteArray = function (hexString) {
-        var result = [];
-        while (hexString.length >= 2) {
-            result.push(parseInt(hexString.substring(0, 2), 16));
-            hexString = hexString.substring(2, hexString.length);
-        }
-        return result;
-    };
     return HomePage;
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Ubirch App</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-buttons>\n\n        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>\n        <button ion-button ArrayToString (click) = "convert()"> Convert </button>\n\n    </ion-buttons>\n\n    <ion-list>\n        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n            <h2>{{ device.name || \'Unnamed\' }}</h2>\n            <p>{{ device.id }}</p>\n            <p>RSSI: {{ device.rssi }}</p>\n        </button>\n    </ion-list>\n\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar>\n        <p>{{ statusMessage }}</p>\n    </ion-toolbar>\n</ion-footer>\n\n\n\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Ubirch App</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-buttons>\n\n        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>\n\n    </ion-buttons>\n\n    <ion-list>\n        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n            <h2>{{ device.name || \'Unnamed\' }}</h2>\n            <p>{{ device.id }}</p>\n            <p>RSSI: {{ device.rssi }}</p>\n        </button>\n    </ion-list>\n\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar>\n        <p>{{ statusMessage }}</p>\n    </ion-toolbar>\n</ion-footer>\n\n\n\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
@@ -251,6 +228,9 @@ var DetailPage = (function () {
             return ('00' + b.toString(16)).slice(-2).toString();
         }).join('');
     };
+    /**
+        End of convertion methods
+     */
     DetailPage.prototype.writeMessage = function () {
         var _this = this;
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC, message.buffer).then(function (data) { return _this.showAlert('Success !', 'Written = ' + _this.bytesToString(message.buffer)); }, function () { return _this.showAlert('Unexpected Error', 'Failed to write to the characteristic'); });

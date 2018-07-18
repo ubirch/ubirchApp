@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jul 18 17:20:36 CEST 2018
+#Wed Jul 18 17:31:06 CEST 2018
 5.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/res/debug/resources-debug.ap_
 42.base=/Users/victor/Documents/ubirchApp/platforms/android/app/build/intermediates/assets/debug
 32.set=ASSET
