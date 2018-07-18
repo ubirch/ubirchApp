@@ -2,14 +2,9 @@ import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 
 import { BLE } from '@ionic-native/ble';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import * as nacl from 'tweetnacl';
 
-=======
->>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
-=======
->>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
+
 
 
 /**
@@ -27,7 +22,6 @@ const PUBLIC_KEY_CHARACTERISTIC= '80E4FE22-E6A2-4C5E-BD8D-090C2660D898';
 
 var message = new Uint8Array([0xFF]);
 
-var message2 = "Hello";
 
 
 @Component({
@@ -128,7 +122,9 @@ export class DetailPage {
         ).join('');
     }
 
-
+/**
+    End of convertion methods
+ */
 
     writeMessage() {
         this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
@@ -138,14 +134,6 @@ export class DetailPage {
         );
     }
 
-    // writeMessage() {
-    //     this.ble.write(this.peripheral.id, HANDSHAKE_SERVICE,
-    //         SIGNATURE_CHARACTERISTIC, this.stringToBytes(message2)).then(
-    //         data => this.showAlert('Success !', 'Written = ' + message2)),
-    //
-    //         () => this.showAlert('Unexpected Error', 'Failed to write to the characteristic')
-    //     );
-    // }
 
     readPubKey() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
@@ -165,8 +153,7 @@ export class DetailPage {
  *  verify(msg: Uint8Array, sig: Uint8Array, publicKey: Uint8Array): boolean;git
  **/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     verifySignature() {
         this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC).then(
             data => this.pubkey = data,
@@ -187,26 +174,7 @@ export class DetailPage {
             this.showAlert('Error', 'Signature NOT Valid');
         }
     }
-=======
-=======
->>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
-    // verifySignature() {
-    //     let signature = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, SIGNATURE_CHARACTERISTIC);
-    //     let pubKey = this.ble.read(this.peripheral.id, HANDSHAKE_SERVICE, PUBLIC_KEY_CHARACTERISTIC);
-    //
-    //     if (ed25519.verify(new Buffer(message, 'utf8'), signature, pubKey )) {
-    //         console.log('Signature valid');
-    //         this.showAlert('Success!', 'The signature is valid !');
-    //     } else {
-    //         console.log('Signature NOT valid');
-    //         this.showAlert('Error', 'Signature NOT Valid');
-    //
-    //     }
-    // }
-<<<<<<< HEAD
->>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
-=======
->>>>>>> 9d8128f00d85b6b18b2963457e0af8e9ffeb87dc
+
 
 }
 

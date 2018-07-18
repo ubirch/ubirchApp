@@ -3,8 +3,6 @@ import { NavController, ToastController } from 'ionic-angular';
 import { DetailPage } from '../detail/detail';
 import { BLE } from '@ionic-native/ble';
 
-var byteArray = new Uint8Array([150 ,0x3d, 0xff, 0x00]);
-
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'
@@ -72,35 +70,5 @@ export class HomePage {
             device: device
         });
     }
-
-    /**
-     * This is just for testing byteArray conversion in hexString
-     */
-
-    convert() {
-        let hexString = this.toHexString(byteArray);
-        let byteArray2 = this.toByteArray(hexString);
-        console.log(hexString);
-        console.log(byteArray2);
-
-    }
-
-    toHexString(byteArray) {
-        return Array.prototype.map.call(byteArray,b =>
-            ('00' + b.toString(16)).slice(-2).toString()
-        ).join('');
-    }
-
-
-    toByteArray(hexString) {
-        var result = [];
-        while (hexString.length >= 2) {
-            result.push(parseInt(hexString.substring(0, 2), 16));
-            hexString = hexString.substring(2, hexString.length);
-            }
-        return result;
-    }
-
-
 
 }
