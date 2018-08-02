@@ -6,7 +6,6 @@ import * as nacl from 'tweetnacl';
 
 
 
-
 /**
  * Bluetooth UUIDs
  **/
@@ -176,5 +175,5 @@ export class DetailPage {
     }
 
 
-}
+ }
 

@@ -26,3 +26,12 @@ Note: You might need to open Xcode and set the Team for code signing.
 Assuming you have the Android SDK installed
 
     ionic cordova run android --device
+
+Running this command will install the cordova plugins needed.
+
+## For development on Android
+
+ionic cordova run android --device=deviceid --livereload --debug
+
+-USB debugging must be activated on Android devices
+-deviceid is obtained by running $adb devices on terminal
