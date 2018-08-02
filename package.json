@@ -27,7 +27,6 @@
     "@ionic/storage": "2.0.1",
     "ajv": "^5.5.2",
     "cordova-browser": "~5.0.3",
-    "cordova-ios": "~4.5.4",
     "cordova-plugin-ble-central": "^1.2.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
@@ -41,6 +40,7 @@
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.12",
+    "cordova-ios": "~4.5.5",
     "cordova-android": "~7.0.0"
   },
   "devDependencies": {

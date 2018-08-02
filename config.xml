@@ -3,7 +3,7 @@
     <name>Ubirch App</name>
     <description>Scan for and connects to BLE peripherals in order to do a cryptographic handshake</description>
     <author href="http://github.com/vpatrin">Victor Patrin</author>
-    <content original-src="index.html" src="http://192.168.178.151:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -89,6 +89,6 @@
     <allow-navigation href="http://192.168.178.151:8101" />
     <allow-navigation href="http://192.168.178.151:8100" />
     <engine name="browser" spec="~5.0.3" />
-    <engine name="ios" spec="~4.5.4" />
+    <engine name="ios" spec="~4.5.5" />
     <engine name="android" spec="~7.0.0" />
 </widget>
