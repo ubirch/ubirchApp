@@ -31,7 +31,7 @@ Running this command will install the cordova plugins needed.
 
 ## For development on Android
 
-ionic cordova run android --device=deviceid --livereload --debug
+    ionic cordova run android --device=deviceid --livereload --debug
 
 -USB debugging must be activated on Android devices
--deviceid is obtained by running $adb devices on terminal
+-deviceid is obtained by running on terminal : adb devices
