@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/html">
+
+<head> <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="styles/vendor.8a8a7cff.css"> <link rel="stylesheet" href="styles/main.c62a4aaa.css">
+</head>
+
+<body ng-app="ubirchAdminCrudApp"> <!--[if lte IE 8]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]--> <!-- Add your site or application content here --> <div class="header"> <navigation></navigation> </div> <div class="container"> <div ui-view=""></div> </div>
+
+<ion-content>
+
+    <ion-buttons>
+
+        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>
+
+    </ion-buttons>
+
+    <ion-list>
+        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">
+            <h2>{{ device.name || 'Unnamed' }}</h2>
+            <p>{{ device.id }}</p>
+            <p>RSSI: {{ device.rssi }}</p>
+        </button>
+    </ion-list>
+
+</ion-content>
+
+
+<div class="footer"> <div class="container"> <p>ubirch GmbH</p> </div> </div>
+
+
+
+
+<script src="externals/js/nacl-fast.min.js"></script> <script src="externals/js/nacl-util.min.js"></script> <script src="scripts/vendor.d293a3ae.js"></script> <script src="scripts/scripts.aec6f0ab.js"></script>
+</body>
+
+
+<ion-footer>
+    <ion-toolbar>
+        <p>{{ statusMessage }}</p>
+    </ion-toolbar>
+</ion-footer>
+
+
+</html>

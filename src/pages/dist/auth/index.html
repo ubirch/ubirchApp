@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authenticate</title>
+</head>
+
+<script language=javascript>
+  function redirect(){
+    var query = window.location.search.substring(1);
+    var origin = window.location.origin;
+    window.location = origin + "/#!/auth?" + query;
+  }
+</script>
+
+<body onload="redirect()">
+</body>
+</html>
