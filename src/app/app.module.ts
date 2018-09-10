@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BLE } from '@ionic-native/ble';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/dist/adminui';
 import { DetailPage } from '../pages/detail/detail';
 
 @NgModule({

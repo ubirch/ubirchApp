@@ -111,7 +111,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/'<ion-header>\n\n    <ion-navbar>\n        <ion-title>Ubirch Appp</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-buttons>\n\n        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>\n\n    </ion-buttons>\n\n    <ion-list>\n        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n            <h2>{{ device.name || \'Unnamed\' }}</h2>\n            <p>{{ device.id }}</p>\n            <p>RSSI: {{ device.rssi }}</p>\n        </button>\n    </ion-list>\n\n</ion-content>\n\n<ion-footer>\n    <ion-toolbar>\n        <p>{{ statusMessage }}</p>\n    </ion-toolbar>\n</ion-footer>\n\n\n\n'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/victor/Documents/ubirchApp/src/pages/dist/index.html"*/'<!doctype html>\n\n<html xmlns="http://www.w3.org/1999/html">\n\n<head> <meta charset="utf-8">\n    <title></title>\n    <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->\n    <link rel="stylesheet" href="styles/vendor.8a8a7cff.css"> <link rel="stylesheet" href="styles/main.c62a4aaa.css">\n</head>\n\n<body ng-app="ubirchAdminCrudApp"> <!--[if lte IE 8]>\n  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>\n  <![endif]--> <!-- Add your site or application content here --> <div class="header"> <navigation></navigation> </div> <div class="container"> <div ui-view=""></div> </div>\n\n<ion-content>\n\n    <ion-buttons>\n\n        <button ion-button full (click)="scan()"> Scan for BLE Devices </button>\n\n    </ion-buttons>\n\n    <ion-list>\n        <button ion-item *ngFor="let device of devices" (click)="deviceSelected(device)">\n            <h2>{{ device.name || \'Unnamed\' }}</h2>\n            <p>{{ device.id }}</p>\n            <p>RSSI: {{ device.rssi }}</p>\n        </button>\n    </ion-list>\n\n</ion-content>\n\n\n<div class="footer"> <div class="container"> <p>ubirch GmbH</p> </div> </div>\n\n\n\n\n<script src="externals/js/nacl-fast.min.js"></script> <script src="externals/js/nacl-util.min.js"></script> <script src="scripts/vendor.d293a3ae.js"></script> <script src="scripts/scripts.aec6f0ab.js"></script>\n</body>\n\n\n<ion-footer>\n    <ion-toolbar>\n        <p>{{ statusMessage }}</p>\n    </ion-toolbar>\n</ion-footer>\n\n\n</html>'/*ion-inline-end:"/Users/victor/Documents/ubirchApp/src/pages/dist/index.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
@@ -119,7 +119,7 @@ HomePage = __decorate([
         __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* NgZone */]])
 ], HomePage);
 
-//# sourceMappingURL=home.js.map
+//# sourceMappingURL=adminui.js.map
 
 /***/ }),
 
@@ -304,7 +304,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_ble__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(261);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dist_adminui__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_detail_detail__ = __webpack_require__(193);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -330,7 +330,7 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_dist_adminui__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_8__pages_detail_detail__["a" /* DetailPage */]
         ],
         imports: [
@@ -340,7 +340,7 @@ AppModule = __decorate([
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
         entryComponents: [
             __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_dist_adminui__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_8__pages_detail_detail__["a" /* DetailPage */]
         ],
         providers: [
@@ -365,7 +365,7 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_dist_adminui__ = __webpack_require__(192);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -382,7 +382,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen) {
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_dist_adminui__["a" /* HomePage */];
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
